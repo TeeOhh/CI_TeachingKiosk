@@ -1,0 +1,5 @@
+(in-microtheory TeachingKioskMt)
+(isa TeachingKioskMt Microtheory)
+(genlMt TeachingKioskMt SocialModelingEnglishMt)
+(comment TeachingKioskMt "TeachingKioskMt contains the user model ontology.")
+
