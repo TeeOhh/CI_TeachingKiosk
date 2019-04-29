@@ -1,5 +1,61 @@
+;;;; ---------------------------------------------------------------------------
+;;;; File name: userModel.krf
+;;;;    System: Kiosk Learning
+;;;;    Author: Taylor Olson
+;;;;   Created: April 28, 2019 16:00:09
+;;;;   Purpose: 
+;;;; ---------------------------------------------------------------------------
+;;;;  $LastChangedDate: 2019-04-28 12:08:59 -0500 (Sun, 28 Apr 2019) $
+;;;;  $LastChangedBy: olson $
+;;;; ---------------------------------------------------------------------------
+
 (in-microtheory TeachingKioskMt)
 (isa TeachingKioskMt Microtheory)
 (genlMt TeachingKioskMt SocialModelingEnglishMt)
 (comment TeachingKioskMt "TeachingKioskMt contains the user model ontology.")
 
+;; Some already in SocialModelingEnglishMt
+;; *** needs ontologized
+
+;; User Model
+;; ------------------------------------------------------------------------
+;; Required
+;; (isa ?person Agent-Generic)
+;; (SocialModelMtFn ?person) returns ModelMicrotheory
+;; (emailOf ?person ?email)
+;; (nameStringOf ?person ?personName) ***
+;; (isa ?person NUPhDStudent) NUStaff, NUUndergraduate, NUMastersStudent, NUVisitor
+
+;; If User is PhD student or Staff
+;; (officeLocation ?person ?location) add reasoning about locations?
+;; (nuGroupMember ?NUGroup ?person) NUCognitiveSystems, NUSignalsAndSystems, ..
+
+;; If User is Undergraduate
+;; (studentMajor ?person ?AcademicDepartment)
+
+;; Miscellaneous
+;; (personWebsite ?person ?domainName)
+;; (phoneNumberOf ?person ?number)
+;; (schooling ?person ?school ?status) Graduate, PreviouslyEnrolled
+
+
+;; Interests
+;; ------------------------------------------------------------------------
+;; May need compartive relations other than level of interest for partial ordering of interests...
+;; (interests ?person ?thing ?levelOfInterest)
+
+
+;; Schedule
+;; ------------------------------------------------------------------------
+;; (attendingEvent ?person ?event ?date)
+
+;; If User is a PhD student or Staff
+;; (teachingClass ?person ?class)
+
+;; If User is a student
+;; (enrolledInClass ?person ?class)
+;; (nuClubMember ?person ?NUClub)
+
+;; Reminders/Alerts
+;; ------------------------------------------------------------------------
+;; (alertPerson ?person ?thing) ***
