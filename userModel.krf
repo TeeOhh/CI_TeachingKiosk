@@ -24,7 +24,7 @@
 ;; (SocialModelMtFn ?person) returns ModelMicrotheory
 ;; (emailOf ?person ?email)
 ;; (nameStringOf ?person ?personName) ***
-;; (isa ?person NUPhDStudent) NUStaff, NUUndergraduate, NUMastersStudent, NUVisitor
+;; (isa ?person ?type) NUPhDStudent, NUStaff, NUUndergraduate, NUMastersStudent, NUVisitor
 
 ;; If User is PhD student or Staff
 ;; (officeLocation ?person ?location) add reasoning about locations?
@@ -42,11 +42,13 @@
 ;; Interests
 ;; ------------------------------------------------------------------------
 ;; May need compartive relations other than level of interest for partial ordering of interests...
+;; May need to seperate "types" of interests: food vs topics vs ...
 ;; (interests ?person ?thing ?levelOfInterest)
 
 
 ;; Schedule
 ;; ------------------------------------------------------------------------
+;; May need to serperate "types" of events for chunking: class vs meeting vs ...
 ;; (attendingEvent ?person ?event ?date)
 
 ;; If User is a PhD student or Staff
