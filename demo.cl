@@ -14,23 +14,31 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(defvar *kiosk-path* "C:\\Users\\taylor\\Desktop\\CI_TeachingKiosk\\")
-(defvar *kr-files* '("userModel"))
+;;;(defvar *kiosk-path* "C:\\Users\\taylor\\Desktop\\CI_TeachingKiosk\\")
+;;;(defvar *kr-files* '("userModel"))
+;;;
+;;;(defun reload-dcec-mts ()
+;;;  (wipe-kiosk-mts)
+;;;  (dolist (file *kr-files*)
+;;;    (kb:kr-file->kb (concatenate 'string *kiosk-path* file ".krf"))))
+;;;
+;;;(defun wipe-kiosk-mts ()
+;;;  (forget-mt 'TeachingKioskMt))
+;;;
+;;;(defun load-kiosk-mts ()
+;;;  (dolist (file *kr-files*)
+;;;    (kb:kr-file->kb (concatenate 'string *kiosk-path* file ".krf")))
 
-(defun reload-dcec-mts ()
-  (wipe-kiosk-mts)
-  (dolist (file *kr-files*)
-    (kb:kr-file->kb (concatenate 'string *kiosk-path* file ".krf"))))
+(defun kiosk-create-user (email firstName lastName &optional (userType 'NUPerson))
+  ;create unique Microtheory for user
+  ;(fire:kb-store '`(SocialModelMtFn ,email)=userMicrotheory)
+  (let ((name (concatenate 'string firstName " " lastName)))
+    (fire:kb-store `(isa ,email Agent-Generic) :mt 'demoMicrotheory)
+    (fire:kb-store `(nameString ,email ,name) :mt 'demoMicrotheory)
+    (fire:kb-store `(isa ,email ,userType) :mt 'demoMicrotheory)))
 
-(defun wipe-kiosk-mts ()
-  (forget-mt 'TeachingKioskMt))
-
-(defun load-kiosk-mts ()
-  (dolist (file *kr-files*)
-    (kb:kr-file->kb (concatenate 'string *kiosk-path* file ".krf"))))
-
-(defun kiosk-test-rule (rule-name)
-  (fire:query q :context 'TeachingKioskMt))
+(defun add-info (email &optional (userType nil))
+  )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; End of Code
