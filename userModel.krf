@@ -23,7 +23,6 @@
 ;; (isa ?person Agent-Generic)
 ;; (SocialModelMtFn ?person) returns ModelMicrotheory
 ;; (emailOf ?person ?email)
-;; (nameStringOf ?person ?personName) ***
 ;; (isa ?person ?type) NUPhDStudent, NUStaff, NUUndergraduate, NUMastersStudent, NUVisitor
 
 ;; If User is PhD student or Staff

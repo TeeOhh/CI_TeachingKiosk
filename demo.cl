@@ -29,16 +29,39 @@
 ;;;  (dolist (file *kr-files*)
 ;;;    (kb:kr-file->kb (concatenate 'string *kiosk-path* file ".krf")))
 
-(defun kiosk-create-user (email firstName lastName &optional (userType 'NUPerson))
-  ;create unique Microtheory for user
-  ;(fire:kb-store '`(SocialModelMtFn ,email)=userMicrotheory)
-  (let ((name (concatenate 'string firstName " " lastName)))
-    (fire:kb-store `(isa ,email Agent-Generic) :mt 'demoMicrotheory)
-    (fire:kb-store `(nameString ,email ,name) :mt 'demoMicrotheory)
-    (fire:kb-store `(isa ,email ,userType) :mt 'demoMicrotheory)))
+(defun kiosk-create-user (id email firstName lastName &optional (userType "NUPerson"))
+  (let* ((microtheory (userMicrotheory id))
+         (name (concatenate 'string firstName " " lastName))
+         (userType (intern userType))
+         (id (intern id)))
+    (fire:kb-store `(isa ,id Agent-Generic) :mt microtheory)
+    (fire:kb-store `(nameString ,id ,name) :mt microtheory)
+    (fire:kb-store `(emailOf ,id ,email) :mt microtheory)
+    (fire:kb-store `(isa ,id ,userType) :mt microtheory)))
 
-(defun add-info (email &optional (userType nil))
-  )
+(defun request-info (id)
+  (let* ((microtheory (userMicrotheory id))
+         (id (intern id)))
+    (cond ((fire:query `(isa ,id NUStudent) :context microtheory)
+           (print "Hi I see you are an NUStudent.")
+           ;major
+           (print "What is your Major?")
+           (setq major (read-line))
+           (fire:kb-store `(studentMajor ,id NUComputerScience) :mt microtheory))
+          ((fire:query `(isa ,id NUFaculty) :context microtheory)
+           (print "I see you are an NUFaculty.")
+           ;office
+           (print "Where is your office?")
+           (setq office (read-line))
+           (fire:kb-store `(officeLocation ,id ,office) :mt microtheory)))))
+
+(defun get-info (id pred)
+  (let ((microtheory (userMicrotheory id))
+        (id (intern id)))
+    (fire:query `(,pred ,id ?var) :context microtheory)))
+
+(defun userMicrotheory (id)
+  (intern (concatenate 'string id "Mt")))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; End of Code
