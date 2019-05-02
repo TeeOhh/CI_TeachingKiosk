@@ -43,25 +43,36 @@
   (let* ((microtheory (userMicrotheory id))
          (id (intern id)))
     (cond ((fire:query `(isa ,id NUStudent) :context microtheory)
-           (print "Hi I see you are an NUStudent.")
-           ;major
-           (print "What is your Major?")
-           (setq major (read-line))
-           (fire:kb-store `(studentMajor ,id NUComputerScience) :mt microtheory))
+           (print "Hi, I see you are an NUStudent.")
+           (progn
+             (print "What is your Major?")
+             (setq major (read-line))
+             (fire:kb-store `(studentMajor ,id NUComputerScience) :mt microtheory)
+             (print "What class are you taking?")
+             (setq class (read-line))
+             (fire:kb-store `(enrolledInClass ,id ,class) :mt microtheory)))
           ((fire:query `(isa ,id NUFaculty) :context microtheory)
-           (print "I see you are an NUFaculty.")
-           ;office
-           (print "Where is your office?")
-           (setq office (read-line))
-           (fire:kb-store `(officeLocation ,id ,office) :mt microtheory)))))
+           (print "Hi, I see you are an NUFaculty.")
+           (progn
+             (print "Where is your office?")
+             (setq office (read-line))
+             (fire:kb-store `(officeLocation ,id ,office) :mt microtheory)
+             (print "What class are you teaching?")
+             (setq class (read-line))
+             (fire:kb-store `(teachingClass ,id ,class) :mt microtheory))))))
 
 (defun get-info (id pred)
   (let ((microtheory (userMicrotheory id))
         (id (intern id)))
     (fire:query `(,pred ,id ?var) :context microtheory)))
 
+(defun add-info (id pred var)
+  (let* ((microtheory (userMicrotheory id))
+         (id (intern id)))
+    (fire:kb-store `(,pred ,id ,var) :mt microtheory)))
+
 (defun userMicrotheory (id)
-  (intern (concatenate 'string id "Mt")))
+ (intern (concatenate 'string id "Mt")))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; End of Code
