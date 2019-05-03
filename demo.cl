@@ -34,10 +34,10 @@
          (name (concatenate 'string firstName " " lastName))
          (userType (intern userType))
          (id (intern id)))
-    (fire:kb-store `(isa ,id Agent-Generic) :mt microtheory)
-    (fire:kb-store `(nameString ,id ,name) :mt microtheory)
-    (fire:kb-store `(emailOf ,id ,email) :mt microtheory)
-    (fire:kb-store `(isa ,id ,userType) :mt microtheory)))
+    (fire:tell-it `(isa ,id Agent-Generic) :context microtheory)
+    (fire:tell-it `(nameString ,id ,name) :context microtheory)
+    (fire:tell-it `(emailOf ,id ,email) :context microtheory)
+    (fire:tell-it `(isa ,id ,userType) :context microtheory)))
 
 (defun request-info (id)
   (let* ((microtheory (userMicrotheory id))
@@ -47,19 +47,19 @@
            (progn
              (print "What is your Major?")
              (setq major (read-line))
-             (fire:kb-store `(studentMajor ,id NUComputerScience) :mt microtheory)
+             (fire:tell-it `(studentMajor ,id NUComputerScience) :context microtheory)
              (print "What class are you taking?")
              (setq class (read-line))
-             (fire:kb-store `(enrolledInClass ,id ,class) :mt microtheory)))
+             (fire:tell-it `(enrolledInClass ,id ,class) :context microtheory)))
           ((fire:query `(isa ,id NUFaculty) :context microtheory)
            (print "Hi, I see you are an NUFaculty.")
            (progn
              (print "Where is your office?")
              (setq office (read-line))
-             (fire:kb-store `(officeLocation ,id ,office) :mt microtheory)
+             (fire:tell-it `(officeLocation ,id ,office) :context microtheory)
              (print "What class are you teaching?")
              (setq class (read-line))
-             (fire:kb-store `(teachingClass ,id ,class) :mt microtheory))))))
+             (fire:tell-it `(teachingClass ,id ,class) :context microtheory))))))
 
 (defun get-info (id pred)
   (let ((microtheory (userMicrotheory id))
@@ -69,10 +69,10 @@
 (defun add-info (id pred var)
   (let* ((microtheory (userMicrotheory id))
          (id (intern id)))
-    (fire:kb-store `(,pred ,id ,var) :mt microtheory)))
+    (fire:tell-it `(,pred ,id ,var) :context microtheory)))
 
 (defun userMicrotheory (id)
  (intern (concatenate 'string id "Mt")))
-
+ 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; End of Code
