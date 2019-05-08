@@ -19,20 +19,45 @@
 
 ;; User Model
 ;; ------------------------------------------------------------------------
-;; Required
-;; (isa ?person Agent-Generic)
-;; (SocialModelMtFn ?person) returns ModelMicrotheory
-;; (emailOf ?person ?email)
-;; (isa ?person ?type) NUPhDStudent, NUStaff, NUUndergraduate, NUMastersStudent, NUVisitor
+;; ALL USERS
+;; (isa ?personID Agent-Generic)
+;; (emailOf ?personID ?email)
+;; (nameString ?personID ?name)
+;; (firstName ?personID ?firstName)
+;; (isa ?personID ?type) NUPhDStudent, NUStaff, NUUndergraduate, NUMastersStudent, NUVisitor
+;; (slackHandle ?personID ?handle) ***
 
-;; If User is PhD student or Staff
-;; (officeLocation ?person ?location) add reasoning about locations?
-;; (nuGroupMember ?NUGroup ?person) NUCognitiveSystems, NUSignalsAndSystems, ..
+(isa slackHandle Relation)
+(arity slackHandle 2)
+(arg1Isa slackHandle Agent-Generic)
+(arg2Isa slackHandle ProperNameString)
 
-;; If User is Undergraduate
-;; (studentMajor ?person ?AcademicDepartment)
+;; IF USER IS STUDENT
+;; (enrolledInClass ?personID ?Class-Educational) change this to Course-Academic
+;; (passedClass ?personID ?Course-Academic) ***
+;; (studentMajor ?personID ?AcademicDepartment)
+;; (nuClubMember ?personID ?NUClub)
 
-;; Miscellaneous
+;; IF USER IS GRAD
+;; (academicInterests ?personID ?topic ?level)
+
+;;IF USER IS PHD
+;; (officeLocation ?personID ?location)
+;; (advisorOf ?personID ?name/?personID) ***
+;; (nuGroupMember ?NUGroup ?person) NUCognitiveSystems, NUSignalsAndSystems, ...
+;; (teachingClass ?personID ?Course-Educational)
+;; (taForClass ?personID ?Course-Educational) ***
+
+;; IF USER IS FACULTY MEMBER
+;; link to entity in KB???
+;; (nuGroupMember ?NUGroup ?person) NUCognitiveSystems, NUSignalsAndSystems, ...
+;; (academicInterests ?personID ?topic ?level) do interests level here or handle relationally outside?
+;; (teachingClass ?personID ?Course-Educational) change to Course-Academic
+;; (officeLocation ?personID ?location) add reasoning here to get from info in KB
+;; (officeHours ?personID ?time) *** figure out reasoning about time
+
+;; MISCELLANEOUS
+;; Schedule
 ;; (personWebsite ?person ?domainName)
 ;; (phoneNumberOf ?person ?number)
 ;; (schooling ?person ?school ?status) Graduate, PreviouslyEnrolled
@@ -43,7 +68,6 @@
 ;; May need compartive relations other than level of interest for partial ordering of interests...
 ;; May need to seperate "types" of interests: food vs topics vs ...
 ;; (interests ?person ?thing ?levelOfInterest)
-
 
 ;; Schedule
 ;; ------------------------------------------------------------------------
