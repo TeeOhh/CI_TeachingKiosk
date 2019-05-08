@@ -34,10 +34,10 @@
          (name (concatenate 'string firstName " " lastName))
          (userType (intern userType))
          (id (intern id)))
-    (fire:tell-it `(isa ,id Agent-Generic) :context microtheory)
-    (fire:tell-it `(nameString ,id ,name) :context microtheory)
-    (fire:tell-it `(emailOf ,id ,email) :context microtheory)
-    (fire:tell-it `(isa ,id ,userType) :context microtheory)))
+    (fire:kb-store `(isa ,id Agent-Generic) :mt microtheory)
+    (fire:kb-store `(nameString ,id ,name) :mt microtheory)
+    (fire:kb-store `(emailOf ,id ,email) :mt microtheory)
+    (fire:kb-store `(isa ,id ,userType) :mt microtheory)))
 
 (defun request-info (id)
   (let* ((microtheory (userMicrotheory id))
@@ -72,7 +72,7 @@
     (fire:tell-it `(,pred ,id ,var) :context microtheory)))
 
 (defun userMicrotheory (id)
- (intern (concatenate 'string id "Mt")))
+ (intern (concatenate 'string "KioskFriend" id "Mt")))
  
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; End of Code
