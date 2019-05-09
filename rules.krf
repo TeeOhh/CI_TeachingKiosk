@@ -1,0 +1,71 @@
+;;;; ---------------------------------------------------------------------------
+;;;; File name: rules.krf
+;;;;    System: Kiosk Learning
+;;;;    Author: Taylor Olson
+;;;;   Created: May 8, 2019 16:00:09
+;;;;   Purpose: 
+;;;; ---------------------------------------------------------------------------
+(in-microtheory TeachingKioskMt)
+
+(<== (recommendNUEvent ?personID ?event)
+	(interests ?personID ?topic)
+	(academicAreaOf ?event ?topic)
+	(isa ?event NUEvent))
+
+;; this info may not be available across users...
+;; only store identifiers separate? name, email, etc.
+
+(<== (nuGroupMember ?group ?personID)
+	(advisorOf ?personID ?advisor)
+	(nuGroupMember ?group ?advisor))
+
+(<== (nuGroupMember ?group ?advisor)
+	(advisorOf ?personID ?advisor)
+	(nuGroupMember ?group ?personID))
+
+; Artificial Intelligence
+(<== (interests ?personID AI-Topic)
+	(nuGroupMember NUAI ?personID))
+
+;Systems and Networking
+(<== (interests ?personID Systems-Topic)
+	(nuGroupMember NUSystemsandNetworking ?personID))
+
+(<== (interests ?personID Networking-Topic)
+	(nuGroupMember NUSystemsandNetworking ?personID))
+
+;Theory
+(<== (interests ?personID Theory-Topic)
+	(nuGroupMember NUTheory ?personID))
+
+;Human-Computer Interaction
+(<== (interests ?personID HCI-Topic)
+	(nuGroupMember NUHCI ?personID))
+
+;Graphics
+(<== (interests ?personID Graphics-Topic)
+	(nuGroupMember NUGraphics ?personID))
+
+;Robotics
+(<== (interests ?personID Robotics-Topic)
+	(nuGroupMember NURobotics ?personID))
+
+;Computer Engineering
+(<== (interests ?personID ComputerEngineering-Topic)
+	(nuGroupMember NUComputerEngineering ?personID))
+
+;;(<== (busyDoingAt ?personID ?class ?at)
+;;	(enrolledInClass ?personID ?class)
+;;	(timeIntervalOf ?class ?at))
+
+;;(<== (busyDoingAt ?personID ?class ?at)
+;;	(teachingClass ?personID ?class)
+;;	(timeIntervalOf ?class ?at))
+
+;;(<== (busyDoingAt ?personID ?class ?at)
+;;	(taForClass ?personID ?class)
+;;	(timeIntervalOf ?class ?at))
+
+;;(<== (busyDoingAt ?personID ?club ?at)
+;;	(nuClubMember ?personID ?club)
+;;	(timeIntervalOf ?club ?at))

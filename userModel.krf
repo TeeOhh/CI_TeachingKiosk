@@ -28,6 +28,7 @@
 ;; (slackHandle ?personID ?handle) ***
 
 (isa slackHandle Relation)
+(comment slackHandle "slackHandle is a predicate relating an Agent-Generic to his/her slack handle. For example: (slackHandle KioskUser59 kitty123) = the user KioskUser59 has a slack handle of kitty123")
 (arity slackHandle 2)
 (arg1Isa slackHandle Agent-Generic)
 (arg2Isa slackHandle ProperNameString)
@@ -38,22 +39,46 @@
 ;; (studentMajor ?personID ?AcademicDepartment)
 ;; (nuClubMember ?personID ?NUClub)
 
+(isa passedClass Relation)
+(comment passedClass "passedClass is a predicate relating an Agent-Generic to a course he/she has passed. For example: (advisorOf JohnTaylor SystemTheory-Fall2018) = Bob Smith has passed SystemTheory")
+(arity passedClass 2)
+(arg1Isa passedClass Agent-Generic)
+(arg2Isa passedClass Course-Academic)
+
 ;; IF USER IS GRAD
-;; (academicInterests ?personID ?topic ?level)
+;; (interests ?personID ?topic) academic/research interests
 
 ;;IF USER IS PHD
 ;; (officeLocation ?personID ?location)
 ;; (advisorOf ?personID ?name/?personID) ***
 ;; (nuGroupMember ?NUGroup ?person) NUCognitiveSystems, NUSignalsAndSystems, ...
-;; (teachingClass ?personID ?Course-Educational)
-;; (taForClass ?personID ?Course-Educational) ***
+;; (teachingClass ?personID ?Course-Academic)
+;; (taForClass ?personID ?Course-Academic) ***
+
+(isa teachingClass Relation)
+(comment teachingClass "")
+(arity teachingClass 2)
+(arg1Isa advisorOf Agent-Generic)
+(arg2Isa advisorOf Course-Academic)
+
+(isa advisorOf Relation)
+(comment advisorOf "advisorOf is a predicate relating an Agent-Generic to his/her advisor who is also of type Agent-Generic. For example: (advisorOf JohnTaylor BobSmith) = Bob Smith is John Taylor's academic advisor")
+(arity advisorOf 2)
+(arg1Isa advisorOf NUPhDStudent)
+(arg2Isa advisorOf NUFaculty)
+
+(isa taForClass Relation)
+(comment taForClass "taForClass is a predicate relating an Agent-Generic to a class that he/she is currenting TA'ing for. For example: (taForClass JohnTaylor SystemTheory-Fall2018) = John Taylor is currently TA'ing for System Theory")
+(arity taForClass 2)
+(arg1Isa advisorOf Agent-Generic)
+(arg2Isa advisorOf Course-Academic)
 
 ;; IF USER IS FACULTY MEMBER
 ;; link to entity in KB???
 ;; (nuGroupMember ?NUGroup ?person) NUCognitiveSystems, NUSignalsAndSystems, ...
-;; (academicInterests ?personID ?topic ?level) do interests level here or handle relationally outside?
+;; (interests ?personID ?topic)
 ;; (teachingClass ?personID ?Course-Educational) change to Course-Academic
-;; (officeLocation ?personID ?location) add reasoning here to get from info in KB
+;; (officeLocation ?personID ?location) use sameObject for faculty already in KB?
 ;; (officeHours ?personID ?time) *** figure out reasoning about time
 
 ;; MISCELLANEOUS
@@ -63,23 +88,42 @@
 ;; (schooling ?person ?school ?status) Graduate, PreviouslyEnrolled
 
 
+;; Groups after EECS -> CS transition
+;; ------------------------------------------------------------------------
+(isa NUAI NUGroup)
+(isa NUSystemsandNetworking NUGroup)
+(isa NUTheory NUGroup)
+(isa NUHCI NUGroup)
+(isa NUGraphics NUGroup)
+(isa NURobotics NUGroup)
+(isa NUComputerEngineering NUGroup)
+
+(isa AI-Topic AcademicTopic)
+(isa Systems-Topic AcademicTopic)
+(isa Networking-Topic AcademicTopic)
+(isa Theory-Topic AcademicTopic)
+(isa HCI-Topic AcademicTopic)
+(isa Graphics-Topic AcademicTopic)
+(isa Robotics-Topic AcademicTopic)
+
+(isa academicAreaOf Predicate)
+(comment academicAreaOf "A predicate relating a thing to it's academic area. Intended to be used with courses, talks, meetings, etc. ex: (academicAreaOf NUEvent-2018-May-23-Economics501GraduateStudentSem Economics)")
+(arity academicAreaOf 2)
+(arg1Isa academicAreaOf Thing)
+(arg2Isa academicAreaOf AcademicTopic)
+
 ;; Interests
 ;; ------------------------------------------------------------------------
-;; May need compartive relations other than level of interest for partial ordering of interests...
-;; May need to seperate "types" of interests: food vs topics vs ...
-;; (interests ?person ?thing ?levelOfInterest)
+;; Need to handle preferences for partial ordering ...
+(isa interests Predicate)
+(comment interests "interests is a predicate relating an agent to a thing they are interested in. Intended to be used by the Kiosk for storing information such as: (interests Jordan AI-Topic) = Jordan is interested in the topic of AI")
+(arity interests 2)
+(arg1Isa interests Agent-Generic)
+(arg2Isa interests Thing)
 
 ;; Schedule
 ;; ------------------------------------------------------------------------
-;; May need to serperate "types" of events for chunking: class vs meeting vs ...
-;; (attendingEvent ?person ?event ?date)
-
-;; If User is a PhD student or Staff
-;; (teachingClass ?person ?class)
-
-;; If User is a student
-;; (enrolledInClass ?person ?class)
-;; (nuClubMember ?person ?NUClub)
+;; (busyDoingAt ?person ?event ?date) ***
 
 ;; Reminders/Alerts
 ;; ------------------------------------------------------------------------
