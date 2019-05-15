@@ -7,18 +7,36 @@
 ;;;; ---------------------------------------------------------------------------
 (in-microtheory TeachingKioskMt)
 
-;; rank by parent, grandparent, greatgrandparent, ...
+;; extract interests and preferences based on courses taken
+
 (<== (recommendNUEvent ?personID ?event)
 	(interests ?personID ?topic)
-	(academicAreaOf ?event ?topic)
+	(subTopic ?subtopic ?topic)
+	(or (academicAreaOf ?event ?topic)
+		(academicAreaOf ?event ?subtopic))
 	(isa ?event NUEvent))
 
+;; grab all CS courses not taken and pre-reqs satisfied for, then rank by interests?
+
+;; give all courses then flag those that, to our knowledge, they haven't passed pre-reqs for?
 (<== (recommendCourse ?personID ?course)
 	(interests ?personID ?interest)
 	(isa ?interest AcademicTopic)
-	(academicAreaOf ?course AcademicTopic)
+	(subTopic ?subtopic ?interest)
+	(or (academicAreaOf ?course ?interest)
+		(academicAreaOf ?course ?subtopic))
+	(preReqsSatisfied ?personID ?course)
 	(not (or (passedClass ?personID ?course)
 			 (enrolledInClass ?personID ?course))))
+
+(<== (preReqsSatisfied ?personID ?course)
+	(preReq ?prereq ?course)
+	(passedClass ?personID ?prereq))
+
+;; if a student has passed a course with pre-reqs, assume they've passed pre-reqs
+(<== (passedClass ?personID ?prereq)
+	(preReq ?prereq ?course)
+	(passedClass ?personID ?course))
 
 (<== (subTopic ?topic ?grandparents)
 	(subTopic ?topic ?parents)
