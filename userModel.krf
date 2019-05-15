@@ -38,18 +38,6 @@
 ;; (studentMajor ?personID ?AcademicDepartment)
 ;; (nuClubMember ?personID ?NUClub)
 
-(isa passedClass Relation)
-(comment passedClass "passedClass is a predicate relating an Agent-Generic to a course he/she has passed. For example: (advisorOf JohnTaylor SystemTheory-Fall2018) = Bob Smith has passed SystemTheory")
-(arity passedClass 2)
-(arg1Isa passedClass Agent-Generic)
-(arg2Isa passedClass Course-Academic)
-
-(isa enrolledInClass Relation)
-(comment enrolledInClass "enrolledInClass is a predicate relating an Agent-Generic to a course he/she is currently enrolled in. For example: (advisorOf JohnTaylor SystemTheory-Fall2018) = Bob Smith is currently taking SystemTheory")
-(arity enrolledInClass 2)
-(arg1Isa enrolledInClass Agent-Generic)
-(arg2Isa enrolledInClass Course-Academic)
-
 ;; IF USER IS GRAD
 ;; (interests ?personID ?topic) academic/research interests
 
@@ -102,6 +90,27 @@
 (arity interests 2)
 (arg1Isa interests Agent-Generic)
 (arg2Isa interests Thing)
+
+;; Courses
+;; ------------------------------------------------------------------------
+(isa passedClass Relation)
+(comment passedClass "passedClass is a predicate relating an Agent-Generic to a course he/she has passed. For example: (advisorOf JohnTaylor SystemTheory-Fall2018) = Bob Smith has passed SystemTheory")
+(arity passedClass 2)
+(arg1Isa passedClass Agent-Generic)
+(arg2Isa passedClass Course-Academic)
+
+(isa enrolledInClass Relation)
+(comment enrolledInClass "enrolledInClass is a predicate relating an Agent-Generic to a course he/she is currently enrolled in. For example: (advisorOf JohnTaylor SystemTheory-Fall2018) = Bob Smith is currently taking SystemTheory")
+(arity enrolledInClass 2)
+(arg1Isa enrolledInClass Agent-Generic)
+(arg2Isa enrolledInClass Course-Academic)
+
+(isa preReqsSatisfied Predicate)
+(comment preReqsSatisfied "A predicate relating an agent to a course that it has satisfied the pre-requistites for. ex: (preReqsSatisfied JohnTaylor SystemTheory-Fall2018) = JohnTaylor has satisfied all of the pre-reqs for System Theory")
+(arity preReqsSatisfied 2)
+(arg1Isa preReqsSatisfied Agent-Generic)
+(arg2Isa preReqsSatisfied Course-Academic)
+
 
 ;; Schedule
 ;; ------------------------------------------------------------------------

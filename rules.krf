@@ -11,7 +11,7 @@
 
 (<== (recommendNUEvent ?personID ?event)
 	(interests ?personID ?topic)
-	(subTopic ?subtopic ?topic)
+	(subTopic ?topic ?subtopic)
 	(or (academicAreaOf ?event ?topic)
 		(academicAreaOf ?event ?subtopic))
 	(isa ?event NUEvent))
@@ -19,12 +19,15 @@
 ;; grab all CS courses not taken and pre-reqs satisfied for, then rank by interests?
 
 ;; give all courses then flag those that, to our knowledge, they haven't passed pre-reqs for?
+
+;; give only courses that come in following quarter? With option to specify a quarter...
 (<== (recommendCourse ?personID ?course)
 	(interests ?personID ?interest)
 	(isa ?interest AcademicTopic)
-	(subTopic ?subtopic ?interest)
+	(subTopic ?interest ?subtopic)
 	(or (academicAreaOf ?course ?interest)
 		(academicAreaOf ?course ?subtopic))
+	(isa ?course Course-Academic)
 	(preReqsSatisfied ?personID ?course)
 	(not (or (passedClass ?personID ?course)
 			 (enrolledInClass ?personID ?course))))
@@ -38,9 +41,9 @@
 	(preReq ?prereq ?course)
 	(passedClass ?personID ?course))
 
-(<== (subTopic ?topic ?grandparents)
-	(subTopic ?topic ?parents)
- 	(subTopic ?parents ?grandparents))
+(<== (subTopic ?grandparents ?topic)
+	(subTopic ?parents ?topic)
+ 	(subTopic ?grandparents ?parents))
 
 (<== (nuGroupMember ?group ?personID)
 	(advisorOf ?personID ?advisor)
