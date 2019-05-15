@@ -20,11 +20,10 @@
 ;; User Model
 ;; ------------------------------------------------------------------------
 ;; ALL USERS
-;; (isa ?personID Agent-Generic)
+;; (isa ?personID ?type) NUPhDStudent, NUStaff, NUUndergraduate, NUMastersStudent, NUVisitor
 ;; (emailOf ?personID ?email)
 ;; (nameString ?personID ?name)
 ;; (firstName ?personID ?firstName)
-;; (isa ?personID ?type) NUPhDStudent, NUStaff, NUUndergraduate, NUMastersStudent, NUVisitor
 ;; (slackHandle ?personID ?handle) ***
 
 (isa slackHandle Relation)
@@ -45,6 +44,12 @@
 (arg1Isa passedClass Agent-Generic)
 (arg2Isa passedClass Course-Academic)
 
+(isa enrolledInClass Relation)
+(comment enrolledInClass "enrolledInClass is a predicate relating an Agent-Generic to a course he/she is currently enrolled in. For example: (advisorOf JohnTaylor SystemTheory-Fall2018) = Bob Smith is currently taking SystemTheory")
+(arity enrolledInClass 2)
+(arg1Isa enrolledInClass Agent-Generic)
+(arg2Isa enrolledInClass Course-Academic)
+
 ;; IF USER IS GRAD
 ;; (interests ?personID ?topic) academic/research interests
 
@@ -55,11 +60,11 @@
 ;; (teachingClass ?personID ?Course-Academic)
 ;; (taForClass ?personID ?Course-Academic) ***
 
-(isa teachingClass Relation)
-(comment teachingClass "")
+(isa teachingClass Predicate)
+(comment teachingClass Class "A predicate relating an agent to a course he/she is teaching. ex: (teachingClass BobTaylor SystemTheory-Fall2018) = BobTaylor is teaching SystemTheory")
 (arity teachingClass 2)
-(arg1Isa advisorOf Agent-Generic)
-(arg2Isa advisorOf Course-Academic)
+(arg1Isa teachingClass Agent-Generic)
+(arg2Isa teachingClass Course-Academic)
 
 (isa advisorOf Relation)
 (comment advisorOf "advisorOf is a predicate relating an Agent-Generic to his/her advisor who is also of type Agent-Generic. For example: (advisorOf JohnTaylor BobSmith) = Bob Smith is John Taylor's academic advisor")
@@ -81,36 +86,13 @@
 ;; (officeLocation ?personID ?location) use sameObject for faculty already in KB?
 ;; (officeHours ?personID ?time) *** figure out reasoning about time
 
+
 ;; MISCELLANEOUS
 ;; Schedule
 ;; (personWebsite ?person ?domainName)
 ;; (phoneNumberOf ?person ?number)
 ;; (schooling ?person ?school ?status) Graduate, PreviouslyEnrolled
 
-
-;; Groups after EECS -> CS transition
-;; ------------------------------------------------------------------------
-(isa NUAI NUGroup)
-(isa NUSystemsandNetworking NUGroup)
-(isa NUTheory NUGroup)
-(isa NUHCI NUGroup)
-(isa NUGraphics NUGroup)
-(isa NURobotics NUGroup)
-(isa NUComputerEngineering NUGroup)
-
-(isa AI-Topic AcademicTopic)
-(isa Systems-Topic AcademicTopic)
-(isa Networking-Topic AcademicTopic)
-(isa Theory-Topic AcademicTopic)
-(isa HCI-Topic AcademicTopic)
-(isa Graphics-Topic AcademicTopic)
-(isa Robotics-Topic AcademicTopic)
-
-(isa academicAreaOf Predicate)
-(comment academicAreaOf "A predicate relating a thing to it's academic area. Intended to be used with courses, talks, meetings, etc. ex: (academicAreaOf NUEvent-2018-May-23-Economics501GraduateStudentSem Economics)")
-(arity academicAreaOf 2)
-(arg1Isa academicAreaOf Thing)
-(arg2Isa academicAreaOf AcademicTopic)
 
 ;; Interests
 ;; ------------------------------------------------------------------------

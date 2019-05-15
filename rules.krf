@@ -7,13 +7,22 @@
 ;;;; ---------------------------------------------------------------------------
 (in-microtheory TeachingKioskMt)
 
+;; rank by parent, grandparent, greatgrandparent, ...
 (<== (recommendNUEvent ?personID ?event)
 	(interests ?personID ?topic)
 	(academicAreaOf ?event ?topic)
 	(isa ?event NUEvent))
 
-;; this info may not be available across users...
-;; only store identifiers separate? name, email, etc.
+(<== (recommendCourse ?personID ?course)
+	(interests ?personID ?interest)
+	(isa ?interest AcademicTopic)
+	(academicAreaOf ?course AcademicTopic)
+	(not (or (passedClass ?personID ?course)
+			 (enrolledInClass ?personID ?course))))
+
+(<== (subTopic ?topic ?grandparents)
+	(subTopic ?topic ?parents)
+ 	(subTopic ?parents ?grandparents))
 
 (<== (nuGroupMember ?group ?personID)
 	(advisorOf ?personID ?advisor)

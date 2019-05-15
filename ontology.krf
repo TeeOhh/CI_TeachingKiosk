@@ -1,0 +1,38 @@
+(in-microtheory TeachingKioskMt)
+
+;; Groups after EECS -> CS transition
+;; ------------------------------------------------------------------------
+
+;; *** ADD COMMENTS ***
+(isa NUAI NUGroup)
+(isa NUSystemsandNetworking NUGroup)
+(isa NUTheory NUGroup)
+(isa NUHCI NUGroup)
+(isa NUGraphics NUGroup)
+(isa NURobotics NUGroup)
+(isa NUComputerEngineering NUGroup)
+
+(isa AI-Topic AcademicTopic)
+(isa Systems-Topic AcademicTopic)
+(isa Networking-Topic AcademicTopic)
+(isa Theory-Topic AcademicTopic)
+(isa HCI-Topic AcademicTopic)
+(isa Graphics-Topic AcademicTopic)
+(isa Robotics-Topic AcademicTopic)
+
+(isa AutomatedReasoning-Topic AcademicTopic)
+(subTopic AutomatedReasoning-Topic AI-Topic)
+
+(isa ML-Topic AcademicTopic)
+(subTopic ML-Topic AI-Topic)
+
+(isa academicAreaOf Predicate)
+(comment academicAreaOf "A predicate relating a thing to it's academic area. Intended to be used with courses, talks, meetings, etc. ex: (academicAreaOf NUEvent-2018-May-23-Economics501GraduateStudentSem Economics)")
+(arity academicAreaOf 2)
+(arg1Isa academicAreaOf Thing)
+(arg2Isa academicAreaOf AcademicTopic)
+
+;(subTopic childTopic parentTopic)
+
+
+
