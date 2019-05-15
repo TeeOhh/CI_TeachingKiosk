@@ -1,3 +1,5 @@
+(in-microtheory TeachingKioskMt)
+
 (isa Hardware AcademicTopic)
 (isa PrintedCircuitBoards AcademicTopic)
 (subTopic PrintedCircuitBoards Hardware)
