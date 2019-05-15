@@ -21,10 +21,10 @@
 (isa Robotics-Topic AcademicTopic)
 
 (isa AutomatedReasoning-Topic AcademicTopic)
-(subTopic AutomatedReasoning-Topic AI-Topic)
+(subTopic AI-Topic AutomatedReasoning-Topic)
 
 (isa ML-Topic AcademicTopic)
-(subTopic ML-Topic AI-Topic)
+(subTopic AI-Topic ML-Topic)
 
 (isa academicAreaOf Predicate)
 (comment academicAreaOf "A predicate relating a thing to it's academic area. Intended to be used with courses, talks, meetings, etc. ex: (academicAreaOf NUEvent-2018-May-23-Economics501GraduateStudentSem Economics)")
@@ -32,7 +32,7 @@
 (arg1Isa academicAreaOf Thing)
 (arg2Isa academicAreaOf AcademicTopic)
 
-;(subTopic childTopic parentTopic)
+;(subTopic parentTopic childTopic)
 
 
 
