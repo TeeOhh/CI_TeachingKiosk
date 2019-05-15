@@ -16,6 +16,7 @@ beautifulsoup4 = "*"
 selenium = "*"
 lxml = "*"
 html5lib = "*"
+nltk = "*"
 
 [requires]
 python_version = "3.7"
