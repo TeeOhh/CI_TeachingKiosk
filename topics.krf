@@ -1,0 +1,21 @@
+(in-microtheory TeachingKioskMt)
+
+;; Prereq blurb needed
+(preReq ?prereq ?course)
+(academicAreaOf ?course ?AcademicTopic)
+
+(academicAreaOf CompanionCognitiveSystemStudio-Spring2018 AI-Topic)
+(academicAreaOf ComputationalPhotographySeminar-Spring2018 Graphics-Topic)
+(academicAreaOf ConversationalInterfaces-Spring2018 AI-Topic)
+(academicAreaOf DesignAndAnalysisofAlgorithms-Spring2018 Theory-Topic)
+(academicAreaOf DigitalImageProcessing-Spring2018 Graphics-Topic)
+(academicAreaOf DistributedSystems-Spring2018 Systems-Topic)
+(academicAreaOf HumanComputerInteraction-Spring2018 HCI-Topic)
+(academicAreaOf IntermediateComputerGraphics-Spring2018 Graphics-Topic)
+(academicAreaOf InternetSecurity-Spring2018 Networking-Topic)
+(academicAreaOf IntroductiontoArtificialIntelligence-Spring2018 AI-Topic)
+(academicAreaOf KernelandOtherLow-levelSoftwareDevelopment-Spring2018 Systems-Topic)
+(academicAreaOf MachineLearning-Spring2018 ML-Topic)
+
+
+
