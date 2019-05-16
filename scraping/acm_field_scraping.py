@@ -1,6 +1,7 @@
 # data loading and manipulation
 import os
 import requests
+import json
 
 import bs4 as bs
 
@@ -183,7 +184,14 @@ def main():
   return output
 
 if __name__ == '__main__':
+  # scrape ACM CCS
   output = main()
+
+  # save scraped tree as json
+  with open('./acm_scraped_fields.json', 'w') as outfile:
+    json.dump(output, outfile)
+
+  # generate krf from output
   krf_list = generate_krf_as_list(output, [])
   with open('../academic-fields.krf', 'w') as f:
       f.write('(in-microtheory TeachingKioskMt)\n\n')
