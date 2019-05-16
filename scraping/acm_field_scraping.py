@@ -102,13 +102,13 @@ def generate_krf_as_list(tree, krf_list):
 
     # recurse deeper
     for child in tree:
-        # SPECIAL CASE: ignore CS
+        # SPECIAL CASE: CS should be added as an AcademicTopic but without -Topic
         if child['name'] != 'ComputerScience':
             curr_child_name = clean_topic_name(child['name'])
             krf_list.append('(isa {} AcademicTopic)'.format(curr_child_name))
 
             if child['parent'] is not None:
-                # SPECIAL CASE: ignore CS parent
+                # SPECIAL CASE: ignore CS parent when cleaning topic name
                 curr_parent_name = ''
                 if child['parent'] == 'ComputerScience':
                     curr_parent_name = child['parent']
@@ -116,6 +116,8 @@ def generate_krf_as_list(tree, krf_list):
                     curr_parent_name = clean_topic_name(child['parent'])
 
                 krf_list.append('(subTopic {} {})'.format(curr_parent_name, curr_child_name))
+        else:
+            krf_list.append('(isa {} AcademicTopic)'.format(child['name']))
 
         krf_list = generate_krf_as_list(child['children'], krf_list)
 
