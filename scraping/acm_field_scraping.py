@@ -84,13 +84,15 @@ def clean_topic_name(topic_name):
     cleaned_topic_name = re.sub("([\(\[]).*?([\)\]])", "\g<1>\g<2>", topic_name)
 
     # remove any puncutation and convert to lowercase
-    cleaned_topic_name = cleaned_topic_name.translate(str.maketrans(string.punctuation, ' '*len(string.punctuation))).lower()
+    cleaned_topic_name = cleaned_topic_name.translate(str.maketrans(string.punctuation, ' ' * len(string.punctuation))).lower()
 
     # remove stop words and make CamelCase
     cleaned_topic_name = ''.join([word.title() for word in cleaned_topic_name.split() if not word.isspace() and word not in stops])
 
-    return cleaned_topic_name
+    # append -Topic to each topic name
+    cleaned_topic_name += '-Topic'
 
+    return cleaned_topic_name
 
 def generate_krf_as_list(tree, krf_list):
     # base case: no more children
@@ -99,12 +101,20 @@ def generate_krf_as_list(tree, krf_list):
 
     # recurse deeper
     for child in tree:
-        curr_child_name = clean_topic_name(child['name'])
-        krf_list.append('(isa {} AcademicTopic)'.format(curr_child_name))
+        # SPECIAL CASE: ignore CS
+        if child['name'] != 'ComputerScience':
+            curr_child_name = clean_topic_name(child['name'])
+            krf_list.append('(isa {} AcademicTopic)'.format(curr_child_name))
 
-        if child['parent'] is not None:
-            curr_parent_name = clean_topic_name(child['parent'])
-            krf_list.append('(subTopic {} {})'.format(curr_child_name, curr_parent_name))
+            if child['parent'] is not None:
+                # SPECIAL CASE: ignore CS parent
+                curr_parent_name = ''
+                if child['parent'] == 'ComputerScience':
+                    curr_parent_name = child['parent']
+                else:
+                    curr_parent_name = clean_topic_name(child['parent'])
+
+                krf_list.append('(subTopic {} {})'.format(curr_parent_name, curr_child_name))
 
         krf_list = generate_krf_as_list(child['children'], krf_list)
 
@@ -159,6 +169,13 @@ def main():
 
   # delete Computing methodologies
   del output[comp_method_index]
+
+  # put everything under CS
+  output = [{
+      'name': 'ComputerScience',
+      'children': output,
+      'parent': None
+  }]
 
   # add parents
   add_parent(output)
