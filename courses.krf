@@ -12,37 +12,43 @@
 (academicAreaOf CompanionCognitiveSystemStudio-Spring2018 AI-Topic)
 
 (isa ComputationalPhotographySeminar-Spring2018 Course-Academic)
-(academicAreaOf ComputationalPhotographySeminar-Spring2018 Graphics-Topic)
+(academicAreaOf ComputationalPhotographySeminar-Spring2018 ComputationalPhotography-Topic)
 
 (isa ConversationalInterfaces-Spring2018Course-Academic)
-(academicAreaOf ConversationalInterfaces-Spring2018 AI-Topic)
+(academicAreaOf ConversationalInterfaces-Spring2018 DiscourseDialoguePragmatics-Topic)
 
 (isa DesignAndAnalysisofAlgorithms-Spring2018 Course-Academic)
-(academicAreaOf DesignAndAnalysisofAlgorithms-Spring2018 Theory-Topic)
+(academicAreaOf DesignAndAnalysisofAlgorithms-Spring2018 AlgorithmDesignTechniques-Topic)
 
 (isa DigitalImageProcessing-Spring2018 Course-Academic)
-(academicAreaOf DigitalImageProcessing-Spring2018 Graphics-Topic)
+(academicAreaOf DigitalImageProcessing-Spring2018 ImageProcessing-Topic)
 
 (isa DistributedSystems-Spring2018 Course-Academic)
-(academicAreaOf DistributedSystems-Spring2018 Systems-Topic)
+(academicAreaOf DistributedSystems-Spring2018 DistributedSystemsOrganizingPrinciples-Topic)
 
 (isa HumanComputerInteraction-Spring2018 Course-Academic)
-(academicAreaOf HumanComputerInteraction-Spring2018 HCI-Topic)
+(academicAreaOf HumanComputerInteraction-Spring2018 HumanComputerInteraction-Topic)
 
 (isa IntermediateComputerGraphics-Spring2018 Course-Academic)
-(academicAreaOf IntermediateComputerGraphics-Spring2018 Graphics-Topic)
+(academicAreaOf IntermediateComputerGraphics-Spring2018 ComputerGraphics-Topic)
 
 (isa InternetSecurity-Spring2018 Course-Academic)
-(academicAreaOf InternetSecurity-Spring2018 Networking-Topic)
+(academicAreaOf InternetSecurity-Spring2018 NetworkSecurity-Topic)
 
 (isa IntroductiontoArtificialIntelligence-Spring2018 Course-Academic)
-(academicAreaOf IntroductiontoArtificialIntelligence-Spring2018 AI-Topic)
+(academicAreaOf IntroductiontoArtificialIntelligence-Spring2018 ArtificialIntelligence-Topic)
 
 (isa KernelandOtherLow-levelSoftwareDevelopment-Spring2018 Course-Academic)
-(academicAreaOf KernelandOtherLow-levelSoftwareDevelopment-Spring2018 Systems-Topic)
+(academicAreaOf KernelandOtherLow-levelSoftwareDevelopment-Spring2018 OperatingSystems-Topic)
 
 (isa MachineLearning-Spring2018 Course-Academic)
-(academicAreaOf MachineLearning-Spring2018 ML-Topic)
+(academicAreaOf MachineLearning-Spring2018 MachineLearning-Topic)
+
+(isa DesigningandConstructingModelswithMulti-AgentLanguages-Spring2018 Course-Academic)
+(academicAreaOf DesigningandConstructingModelswithMulti-AgentLanguages-Spring2018 MultiAgentSystems-Topic)
+
+(isa RandomizedAlgorithms-Spring2018 Course-Academic)
+(academicAreaOf RandomizedAlgorithms-Spring2018 ProbabilityStatistics-Topic)
 
 
 
