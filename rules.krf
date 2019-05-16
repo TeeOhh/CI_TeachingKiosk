@@ -8,7 +8,7 @@
 (in-microtheory TeachingKioskMt)
 
 ;; extract interests and preferences based on courses taken
-
+;TEST
 (<== (recommendNUEvent ?personID ?event)
 	(interests ?personID ?topic)
 	(subTopic ?topic ?subtopic)
@@ -16,27 +16,30 @@
 		(academicAreaOf ?event ?subtopic))
 	(isa ?event NUEvent))
 
-;; grab all CS courses not taken and pre-reqs satisfied for, then rank by interests?
-
 ;; give all courses then flag those that, to our knowledge, they haven't passed pre-reqs for?
 
 ;; give only courses that come in following quarter? With option to specify a quarter...
-(<== (recommendCourse ?personID ?course)
+;TEST
+(<== (recommendCourse ?personID ?course) ;add quarter
 	(interests ?personID ?interest)
 	(isa ?interest AcademicTopic)
-	(subTopic ?interest ?subtopic)
-	(or (academicAreaOf ?course ?interest)
-		(academicAreaOf ?course ?subtopic))
+	(academicAreaOf ?course ?interest)
 	(isa ?course Course-Academic)
-	(preReqsSatisfied ?personID ?course)
-	(not (or (passedClass ?personID ?course)
-			 (enrolledInClass ?personID ?course))))
+	;(quarter ?course ?quarter)
+	(not (passedClass ?personID ?course))
+	(not (enrolledInClass ?personID ?course)))
 
+(<== (academicAreaOf ?course ?topic)
+	(subTopic ?topic ?subtopic)
+	(academicAreaOf ?course ?subtopic))
+
+;TEST
 (<== (preReqsSatisfied ?personID ?course)
 	(preReq ?prereq ?course)
 	(passedClass ?personID ?prereq))
 
 ;; if a student has passed a course with pre-reqs, assume they've passed pre-reqs
+;TEST
 (<== (passedClass ?personID ?prereq)
 	(preReq ?prereq ?course)
 	(passedClass ?personID ?course))
@@ -45,10 +48,12 @@
 	(subTopic ?parents ?topic)
  	(subTopic ?grandparents ?parents))
 
+;TEST
 (<== (nuGroupMember ?group ?personID)
 	(advisorOf ?personID ?advisor)
 	(nuGroupMember ?group ?advisor))
 
+;TEST
 (<== (nuGroupMember ?group ?advisor)
 	(advisorOf ?personID ?advisor)
 	(nuGroupMember ?group ?personID))

@@ -1,21 +1,44 @@
 (in-microtheory TeachingKioskMt)
 
 ;; Prereq blurb needed
-(preReq ?prereq ?course)
-(academicAreaOf ?course ?AcademicTopic)
+;; (preReq ?prereq ?course)
 
+(isa CompanionCognitiveSystemStudio-Spring2018 Course-Academic)
 (academicAreaOf CompanionCognitiveSystemStudio-Spring2018 AI-Topic)
+
+(isa ComputationalPhotographySeminar-Spring2018 Course-Academic)
 (academicAreaOf ComputationalPhotographySeminar-Spring2018 Graphics-Topic)
+
+(isa ConversationalInterfaces-Spring2018Course-Academic)
 (academicAreaOf ConversationalInterfaces-Spring2018 AI-Topic)
+
+(isa DesignAndAnalysisofAlgorithms-Spring2018 Course-Academic)
 (academicAreaOf DesignAndAnalysisofAlgorithms-Spring2018 Theory-Topic)
+
+(isa DigitalImageProcessing-Spring2018 Course-Academic)
 (academicAreaOf DigitalImageProcessing-Spring2018 Graphics-Topic)
+
+(isa DistributedSystems-Spring2018 Course-Academic)
 (academicAreaOf DistributedSystems-Spring2018 Systems-Topic)
+
+(isa HumanComputerInteraction-Spring2018 Course-Academic)
 (academicAreaOf HumanComputerInteraction-Spring2018 HCI-Topic)
+
+(isa IntermediateComputerGraphics-Spring2018 Course-Academic)
 (academicAreaOf IntermediateComputerGraphics-Spring2018 Graphics-Topic)
+
+(isa InternetSecurity-Spring2018 Course-Academic)
 (academicAreaOf InternetSecurity-Spring2018 Networking-Topic)
+
+(isa IntroductiontoArtificialIntelligence-Spring2018 Course-Academic)
 (academicAreaOf IntroductiontoArtificialIntelligence-Spring2018 AI-Topic)
+
+(isa KernelandOtherLow-levelSoftwareDevelopment-Spring2018 Course-Academic)
 (academicAreaOf KernelandOtherLow-levelSoftwareDevelopment-Spring2018 Systems-Topic)
+
+(isa MachineLearning-Spring2018 Course-Academic)
 (academicAreaOf MachineLearning-Spring2018 ML-Topic)
+
 
 
 
