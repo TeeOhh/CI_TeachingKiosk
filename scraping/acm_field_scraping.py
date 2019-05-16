@@ -1,4 +1,5 @@
 # data loading and manipulation
+import copy
 import os
 import requests
 import json
@@ -42,7 +43,8 @@ def max_depth(tree, curr_depth):
 
     return curr_max_depth
 
-def get_nodes_at_depth(tree, parent, curr_depth, desired_depth):
+
+def print_nodes_at_depth(tree, parent, curr_depth, desired_depth):
     """
     Gets nodes at the desired depth level.
     """
@@ -56,10 +58,28 @@ def get_nodes_at_depth(tree, parent, curr_depth, desired_depth):
     for child in tree:
         if curr_depth == desired_depth:
             print(child['name'])
-        get_nodes_at_depth(child['children'], child['name'], curr_depth + 1, desired_depth)
+        print_nodes_at_depth(child['children'], child['name'], curr_depth + 1, desired_depth)
 
     print()
     return
+
+
+def get_nodes_at_depth(tree, parent, curr_depth, desired_depth):
+    """
+    Gets nodes at the desired depth level.
+    """
+    # base case: no more children or depth limit reached
+    if len(tree) == 0 or curr_depth > desired_depth:
+        return
+
+    # recurse deeper and remove all children if at the desired depth
+    for child in tree:
+        if curr_depth == desired_depth:
+            child['children'] = []
+        else:
+            get_nodes_at_depth(child['children'], child['name'], curr_depth + 1, desired_depth)
+
+    return tree
 
 def index_of_key(list_of_dicts, field, target):
     for index, curr_dict in enumerate(list_of_dicts):
@@ -193,8 +213,18 @@ if __name__ == '__main__':
   with open('./acm_scraped_fields.json', 'w') as outfile:
     json.dump(output, outfile)
 
+  # save small scraped tree as json
+  with open('./acm_scraped_fields_small.json', 'w') as outfile:
+    json.dump(get_nodes_at_depth(copy.deepcopy(output), None, 1, 4), outfile)
+
   # generate krf from output
   krf_list = generate_krf_as_list(output, [])
   with open('../academic-fields.krf', 'w') as f:
+      f.write('(in-microtheory TeachingKioskMt)\n\n')
+      f.write('\n'.join(krf_list))
+
+  # generate small krf with depth limit  = 4
+  krf_list_small = generate_krf_as_list(get_nodes_at_depth(copy.deepcopy(output), None, 1, 4), [])
+  with open('../academic-fields-small.krf', 'w') as f:
       f.write('(in-microtheory TeachingKioskMt)\n\n')
       f.write('\n'.join(krf_list))

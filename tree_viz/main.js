@@ -1,4 +1,4 @@
-treeJson = d3.json('../scraping/acm_scraped_fields.json', function(error, treeData) {
+treeJson = d3.json('../scraping/acm_scraped_fields_small.json', function(error, treeData) {
     dTree.init(treeData, {
         target: '#graph',
         height: window.innerHeight || document.body.clientHeight,
