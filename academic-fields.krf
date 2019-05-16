@@ -1,5 +1,6 @@
 (in-microtheory TeachingKioskMt)
 
+(isa ComputerScience AcademicTopic)
 (isa Hardware-Topic AcademicTopic)
 (subTopic ComputerScience Hardware-Topic)
 (isa PrintedCircuitBoards-Topic AcademicTopic)

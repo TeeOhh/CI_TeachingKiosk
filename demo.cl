@@ -14,31 +14,42 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;(defvar *kiosk-path* "C:\\Users\\taylor\\Desktop\\CI_TeachingKiosk\\")
-;;;(defvar *kr-files* '("userModel"))
-;;;
-;;;(defun reload-dcec-mts ()
-;;;  (wipe-kiosk-mts)
-;;;  (dolist (file *kr-files*)
-;;;    (kb:kr-file->kb (concatenate 'string *kiosk-path* file ".krf"))))
-;;;
-;;;(defun wipe-kiosk-mts ()
-;;;  (forget-mt 'TeachingKioskMt))
-;;;
-;;;(defun load-kiosk-mts ()
-;;;  (dolist (file *kr-files*)
-;;;    (kb:kr-file->kb (concatenate 'string *kiosk-path* file ".krf")))
+(defvar *kiosk-path* "C:\\Users\\taylor\\Desktop\\CI_TeachingKiosk\\")
+(defvar *kr-files* '("ontology" "academic-fields-short" "courses" "rules"))
 
-(defun kiosk-create-user (id email firstName lastName &optional (userType "NUPerson"))
-  (let* ((microtheory (userMicrotheory id))
-         (name (concatenate 'string firstName " " lastName))
-         (userType (intern userType))
-         (id (intern id)))
-    (fire:kb-store `(isa ,id Agent-Generic) :mt microtheory)
-    (fire:kb-store `(nameString ,id ,name) :mt microtheory)
-    (fire:kb-store `(emailOf ,id ,email) :mt microtheory)
-    (fire:kb-store `(isa ,id ,userType) :mt microtheory)))
+(defun reload-kiosk-mts ()
+  (wipe-kiosk-mts)
+  (dolist (file *kr-files*)
+    (kb:kr-file->kb (concatenate 'string *kiosk-path* file ".krf"))))
 
+(defun wipe-kiosk-mts ()
+  (forget-mt 'TeachingKioskMt))
+
+(defun load-kiosk-mts ()
+  (dolist (file *kr-files*)
+    (kb:kr-file->kb (concatenate 'string *kiosk-path* file ".krf"))))
+
+(defun kiosk-create-user (id email &optional (userType 'NUPerson))
+    (fire:kb-store `(isa ,id ,userType) :mt 'TeachingKioskMt)
+    (fire:kb-store `(emailOf ,id ,email) :mt 'TeachingKioskMt))
+
+;; Demo - 5/16/19
+;; (kiosk-create-user 'kio1 'kio1@gmail.com 'NUUndergraduate)
+;; (kiosk-create-user 'kio2 'kio2@gmail.com 'NUPhDStudent)
+;; (add-info 'kio1 'interests 'ArtificialIntelligence-Topic)
+;; (add-info 'kio2 'interests 'ArtificialIntelligence-Topic)
+;; (add-info 'kio2 'enrolledInClass 'CompanionCognitiveSystemStudio-Spring2018)
+;; (add-info 'kio2 'passedClass 'IntroductiontoArtificialIntelligence-Spring2018)
+;; (get-info 'kio1 'recommendCourse)
+;; (get-info 'kio2 'recommendCourse)
+
+(defun add-info (id pred var)
+    (fire:kb-store `(,pred ,id ,var) :mt 'TeachingKioskMt))
+
+(defun get-info (id pred)
+    (fire:query `(,pred ,id ?var) :context 'TeachingKioskMt))
+
+;; ---------------------------- OLD -------------------------------
 (defun request-info (id)
   (let* ((microtheory (userMicrotheory id))
          (id (intern id)))
@@ -60,19 +71,6 @@
              (print "What class are you teaching?")
              (setq class (read-line))
              (fire:tell-it `(teachingClass ,id ,class) :context microtheory))))))
-
-(defun get-info (id pred)
-  (let ((microtheory (userMicrotheory id))
-        (id (intern id)))
-    (fire:query `(,pred ,id ?var) :context microtheory)))
-
-(defun add-info (id pred var)
-  (let* ((microtheory (userMicrotheory id))
-         (id (intern id)))
-    (fire:tell-it `(,pred ,id ,var) :context microtheory)))
-
-(defun userMicrotheory (id)
- (intern (concatenate 'string "KioskFriend" id "Mt")))
  
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; End of Code

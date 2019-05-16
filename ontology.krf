@@ -1,30 +1,115 @@
+;;;; ---------------------------------------------------------------------------
+;;;; File name: userModel.krf
+;;;;    System: Kiosk Learning
+;;;;    Author: Taylor Olson
+;;;;   Created: April 28, 2019 16:00:09
+;;;;   Purpose: 
+;;;; ---------------------------------------------------------------------------
+;;;;  $LastChangedDate: 2019-04-28 12:08:59 -0500 (Sun, 28 Apr 2019) $
+;;;;  $LastChangedBy: olson $
+;;;; ---------------------------------------------------------------------------
+
 (in-microtheory TeachingKioskMt)
+(isa TeachingKioskMt Microtheory)
+(genlMt TeachingKioskMt SocialModelingEnglishMt)
+(comment TeachingKioskMt "TeachingKioskMt contains the user model ontology.")
 
-;; Groups after EECS -> CS transition
+;; Some already in SocialModelingEnglishMt
+;; *** needs ontologized
+
+;; User Model
 ;; ------------------------------------------------------------------------
+;; ALL USERS
+;; (isa ?personID ?type) NUPhDStudent, NUStaff, NUUndergraduate, NUMastersStudent, NUVisitor
+;; (emailOf ?personID ?email)
+;; (nameString ?personID ?name)
+;; (firstName ?personID ?firstName)
+;; (slackHandle ?personID ?handle) ***
 
-;; *** ADD COMMENTS ***
-(isa NUAI NUGroup)
-(isa NUSystemsandNetworking NUGroup)
-(isa NUTheory NUGroup)
-(isa NUHCI NUGroup)
-(isa NUGraphics NUGroup)
-(isa NURobotics NUGroup)
-(isa NUComputerEngineering NUGroup)
+(isa slackHandle Relation)
+(comment slackHandle "slackHandle is a predicate relating an Agent-Generic to his/her slack handle. For example: (slackHandle KioskUser59 kitty123) = the user KioskUser59 has a slack handle of kitty123")
+(arity slackHandle 2)
+(arg1Isa slackHandle Agent-Generic)
+(arg2Isa slackHandle ProperNameString)
 
-(isa AI-Topic AcademicTopic)
-(isa Systems-Topic AcademicTopic)
-(isa Networking-Topic AcademicTopic)
-(isa Theory-Topic AcademicTopic)
-(isa HCI-Topic AcademicTopic)
-(isa Graphics-Topic AcademicTopic)
-(isa Robotics-Topic AcademicTopic)
+;; IF USER IS STUDENT
+;; (enrolledInClass ?personID ?Class-Educational) change this to Course-Academic
+;; (passedClass ?personID ?Course-Academic) ***
+;; (studentMajor ?personID ?AcademicDepartment)
+;; (nuClubMember ?personID ?NUClub)
 
-(isa AutomatedReasoning-Topic AcademicTopic)
-(subTopic AI-Topic AutomatedReasoning-Topic)
+;; IF USER IS GRAD
+;; (interests ?personID ?topic) academic/research interests
 
-(isa ML-Topic AcademicTopic)
-(subTopic AI-Topic ML-Topic)
+;;IF USER IS PHD
+;; (officeLocation ?personID ?location)
+;; (advisorOf ?personID ?name/?personID) ***
+;; (nuGroupMember ?NUGroup ?person) NUCognitiveSystems, NUSignalsAndSystems, ...
+;; (teachingClass ?personID ?Course-Academic)
+;; (taForClass ?personID ?Course-Academic) ***
+
+(isa teachingClass Predicate)
+(comment teachingClass Class "A predicate relating an agent to a course he/she is teaching. ex: (teachingClass BobTaylor SystemTheory-Fall2018) = BobTaylor is teaching SystemTheory")
+(arity teachingClass 2)
+(arg1Isa teachingClass Agent-Generic)
+(arg2Isa teachingClass Course-Academic)
+
+(isa advisorOf Relation)
+(comment advisorOf "advisorOf is a predicate relating an Agent-Generic to his/her advisor who is also of type Agent-Generic. For example: (advisorOf JohnTaylor BobSmith) = Bob Smith is John Taylor's academic advisor")
+(arity advisorOf 2)
+(arg1Isa advisorOf NUPhDStudent)
+(arg2Isa advisorOf NUFaculty)
+
+(isa taForClass Relation)
+(comment taForClass "taForClass is a predicate relating an Agent-Generic to a class that he/she is currenting TA'ing for. For example: (taForClass JohnTaylor SystemTheory-Fall2018) = John Taylor is currently TA'ing for System Theory")
+(arity taForClass 2)
+(arg1Isa advisorOf Agent-Generic)
+(arg2Isa advisorOf Course-Academic)
+
+;; IF USER IS FACULTY MEMBER
+;; link to entity in KB???
+;; (nuGroupMember ?NUGroup ?person) NUCognitiveSystems, NUSignalsAndSystems, ...
+;; (interests ?personID ?topic)
+;; (teachingClass ?personID ?Course-Educational) change to Course-Academic
+;; (officeLocation ?personID ?location) use sameObject for faculty already in KB?
+;; (officeHours ?personID ?time) *** figure out reasoning about time
+
+
+;; MISCELLANEOUS
+;; Schedule
+;; (personWebsite ?person ?domainName)
+;; (phoneNumberOf ?person ?number)
+;; (schooling ?person ?school ?status) Graduate, PreviouslyEnrolled
+
+
+;; Interests
+;; ------------------------------------------------------------------------
+;; Need to handle preferences for partial ordering ...
+(isa interests Predicate)
+(comment interests "interests is a predicate relating an agent to a thing they are interested in. Intended to be used by the Kiosk for storing information such as: (interests Jordan AI-Topic) = Jordan is interested in the topic of AI")
+(arity interests 2)
+(arg1Isa interests Agent-Generic)
+(arg2Isa interests Thing)
+
+;; Courses
+;; ------------------------------------------------------------------------
+(isa passedClass Relation)
+(comment passedClass "passedClass is a predicate relating an Agent-Generic to a course he/she has passed. For example: (advisorOf JohnTaylor SystemTheory-Fall2018) = Bob Smith has passed SystemTheory")
+(arity passedClass 2)
+(arg1Isa passedClass Agent-Generic)
+(arg2Isa passedClass Course-Academic)
+
+(isa enrolledInClass Relation)
+(comment enrolledInClass "enrolledInClass is a predicate relating an Agent-Generic to a course he/she is currently enrolled in. For example: (advisorOf JohnTaylor SystemTheory-Fall2018) = Bob Smith is currently taking SystemTheory")
+(arity enrolledInClass 2)
+(arg1Isa enrolledInClass Agent-Generic)
+(arg2Isa enrolledInClass Course-Academic)
+
+(isa preReqsSatisfied Predicate)
+(comment preReqsSatisfied "A predicate relating an agent to a course that it has satisfied the pre-requistites for. ex: (preReqsSatisfied JohnTaylor SystemTheory-Fall2018) = JohnTaylor has satisfied all of the pre-reqs for System Theory")
+(arity preReqsSatisfied 2)
+(arg1Isa preReqsSatisfied Agent-Generic)
+(arg2Isa preReqsSatisfied Course-Academic)
 
 (isa academicAreaOf Predicate)
 (comment academicAreaOf "A predicate relating a thing to it's academic area. Intended to be used with courses, talks, meetings, etc. ex: (academicAreaOf NUEvent-2018-May-23-Economics501GraduateStudentSem Economics)")
@@ -32,7 +117,10 @@
 (arg1Isa academicAreaOf Thing)
 (arg2Isa academicAreaOf AcademicTopic)
 
-;(subTopic parentTopic childTopic)
+;; Schedule
+;; ------------------------------------------------------------------------
+;; (busyDoingAt ?person ?event ?date) ***
 
-
-
+;; Reminders/Alerts
+;; ------------------------------------------------------------------------
+;; (alertPerson ?person ?thing) ***

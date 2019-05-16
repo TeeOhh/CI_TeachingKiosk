@@ -9,7 +9,7 @@
 (comment preReq "Indicates the ARG1 is a prerequisite for ARG2")
 
 (isa CompanionCognitiveSystemStudio-Spring2018 Course-Academic)
-(academicAreaOf CompanionCognitiveSystemStudio-Spring2018 AI-Topic)
+(academicAreaOf CompanionCognitiveSystemStudio-Spring2018 ArtificialIntelligence-Topic)
 
 (isa ComputationalPhotographySeminar-Spring2018 Course-Academic)
 (academicAreaOf ComputationalPhotographySeminar-Spring2018 ComputationalPhotography-Topic)

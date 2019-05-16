@@ -26,8 +26,8 @@
 	(academicAreaOf ?course ?interest)
 	(isa ?course Course-Academic)
 	;(quarter ?course ?quarter)
-	(not (passedClass ?personID ?course))
-	(not (enrolledInClass ?personID ?course)))
+	(uninferredSentence (passedClass ?personID ?course))
+	(uninferredSentence (enrolledInClass ?personID ?course)))
 
 (<== (academicAreaOf ?course ?topic)
 	(subTopic ?topic ?subtopic)
