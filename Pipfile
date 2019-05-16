@@ -17,6 +17,7 @@ selenium = "*"
 lxml = "*"
 html5lib = "*"
 nltk = "*"
+pydot = "*"
 
 [requires]
 python_version = "3.7"
