@@ -1,0 +1,16 @@
+;; What are the sub-topics of topicX?
+(subTopic topicX ?children)
+;; return n number of the child topics
+
+;; Who is an expert in topicX?
+(academicAreaOf ?club topicX)
+(nuGroupMember ?agent ?club)
+(isa ?agent NUFaculty)
+;; get agent's name with indexedProperName
+;; return agent's name, along with officeLocation of the agent
+
+;; Who teaches classes in topicX?
+(academicAreaOf ?course topicX)
+(courseInstructor ?course ?agent)
+;; get agent's name with indexedProperName
+;; return agent's name and the ?course, along with officeLocation of the agent

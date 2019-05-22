@@ -94,7 +94,7 @@
 ;;	(timeIntervalOf ?class ?at))
 
 ;;(<== (busyDoingAt ?personID ?class ?at)
-;;	(teachingClass ?personID ?class)
+;;	(courseInstructor ?class ?personID)
 ;;	(timeIntervalOf ?class ?at))
 
 ;;(<== (busyDoingAt ?personID ?class ?at)

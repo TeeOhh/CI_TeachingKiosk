@@ -8,6 +8,8 @@
 (arity preReq 2)
 (comment preReq "Indicates the ARG1 is a prerequisite for ARG2")
 
+;;Change to NUCourse
+
 (isa CompanionCognitiveSystemStudio-Spring2018 Course-Academic)
 (academicAreaOf CompanionCognitiveSystemStudio-Spring2018 ArtificialIntelligence-Topic)
 
