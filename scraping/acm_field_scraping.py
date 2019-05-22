@@ -219,12 +219,12 @@ if __name__ == '__main__':
 
   # generate krf from output
   krf_list = generate_krf_as_list(output, [])
-  with open('../academic-fields.krf', 'w') as f:
+  with open('../krf/academic-fields.krf', 'w') as f:
       f.write('(in-microtheory TeachingKioskMt)\n\n')
       f.write('\n'.join(krf_list))
 
   # generate small krf with depth limit  = 4
   krf_list_small = generate_krf_as_list(get_nodes_at_depth(copy.deepcopy(output), None, 1, 4), [])
-  with open('../academic-fields-small.krf', 'w') as f:
+  with open('../krf/academic-fields-small.krf', 'w') as f:
       f.write('(in-microtheory TeachingKioskMt)\n\n')
       f.write('\n'.join(krf_list))
