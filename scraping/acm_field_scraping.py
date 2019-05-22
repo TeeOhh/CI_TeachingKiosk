@@ -135,7 +135,7 @@ def generate_krf_as_list(tree, krf_list):
                 else:
                     curr_parent_name = clean_topic_name(child['parent'])
 
-                krf_list.append('(directSubTopic {} {})'.format(curr_parent_name, curr_child_name))
+                krf_list.append('(subTopicOf {} {} 1)'.format(curr_parent_name, curr_child_name))
         else:
             krf_list.append('(isa {} AcademicTopic)'.format(child['name']))
 
