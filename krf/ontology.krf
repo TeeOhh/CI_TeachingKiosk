@@ -12,17 +12,17 @@
 (in-microtheory TeachingKioskMt)
 (isa TeachingKioskMt Microtheory)
 (genlMt TeachingKioskMt SocialModelingEnglishMt)
-(comment TeachingKioskMt "TeachingKioskMt contains the user model, user/course relations, and the ontology of academic topics.")
+(comment TeachingKioskMt "TeachingKioskMt contains the user model, user/course Predicates, and the ontology of academic topics.")
 
 (isa NUPhDStudent AcademicProfessional)
 
-(isa slackHandle Relation)
+(isa slackHandle Predicate)
 (comment slackHandle "slackHandle is a predicate relating an Agent-Generic to his/her slack handle. For example: (slackHandle KioskUser59 kitty123) = the user KioskUser59 has a slack handle of kitty123")
 (arity slackHandle 2)
 (arg1Isa slackHandle NUPerson)
 (arg2Isa slackHandle ProperNameString)
 
-(isa advisorOf Relation)
+(isa advisorOf Predicate)
 (comment advisorOf "advisorOf is a predicate relating an Agent-Generic to his/her advisor who is also of type Agent-Generic. For example: (advisorOf JacobTaylor BobSmith) = Bob Smith is Jacob Taylor's academic advisor")
 (arity advisorOf 2)
 (arg1Isa advisorOf NUPhDStudent)
@@ -30,11 +30,18 @@
 
 ;; (courseInstructor ?course ?teacher)
 
-(isa taForClass Relation)
+(isa taForClass Predicate)
 (comment taForClass "taForClass is a predicate relating an Agent-Generic to a class that he/she is currenting TA'ing for. For example: (taForClass JacobTaylor SystemTheory-Fall2018) = Jacob Taylor is currently TA'ing for System Theory")
 (arity taForClass 2)
-(arg1Isa advisorOf NUPerson)
-(arg2Isa advisorOf Course-Academic)
+(arg1Isa taForClass NUPerson)
+(arg2Isa taForClass Course-Academic)
+
+(isa subTopicOf Predicate)
+(comment subTopicOf "subTopic of is a predicate relating two academic topics and the distance between them (assuming they exist in a graph of topics). For example (subTopicOf CS-Topic MachineLearning-Topic 2) states that ML is a subtopic of CS with a distance of two between them.")
+(arity subTopicOf 3)
+(arg1Isa subTopicOf Academic-Topic)
+(arg2Isa subTopicOf Academic-Topic)
+(arg3Isa subTopicOf Number)
 
 ;; Interests
 ;; ------------------------------------------------------------------------
@@ -47,13 +54,13 @@
 
 ;; Courses
 ;; ------------------------------------------------------------------------
-(isa passedClass Relation)
+(isa passedClass Predicate)
 (comment passedClass "passedClass is a predicate relating an Agent-Generic to a course he/she has passed. For example: (advisorOf JacobTaylor SystemTheory-Fall2018) = Bob Smith has passed SystemTheory")
 (arity passedClass 2)
 (arg1Isa passedClass NUPerson)
 (arg2Isa passedClass NUCourse)
 
-(isa enrolledInClass Relation)
+(isa enrolledInClass Predicate)
 (comment enrolledInClass "enrolledInClass is a predicate relating an Agent-Generic to a course he/she is currently enrolled in. For example: (advisorOf JacobTaylor SystemTheory-Fall2018) = Bob Smith is currently taking SystemTheory")
 (arity enrolledInClass 2)
 (arg1Isa enrolledInClass NUPerson)
@@ -71,7 +78,7 @@
 (arg1Isa academicAreaOf Thing)
 (arg2Isa academicAreaOf AcademicTopic)
 
-(isa preReq Relation)
+(isa preReq Predicate)
 (arg1Isa preReq NUCourse)
 (arg2Isa preReq NUCourse)
 (arity preReq 2)

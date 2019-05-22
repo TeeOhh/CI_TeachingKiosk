@@ -20,19 +20,10 @@
 
 ;; give only courses that come in following quarter? With option to specify a quarter...
 ;TEST
-(<== (recommendCourse ?personID ?course) ;add quarter
+(<== (recommendCourse ?personID ?course ?distance) ;distance unbound means get all subtopics
 	(interests ?personID ?interest)
 	(isa ?interest AcademicTopic)
-	(academicAreaOf ?course ?interest)
-	(isa ?course NUCourse)
-	;(quarter ?course ?quarter)
-	(uninferredSentence (passedClass ?personID ?course))
-	(uninferredSentence (enrolledInClass ?personID ?course)))
-
-(<== (recommendCourse ?personID ?course) ;add quarter
-	(interests ?personID ?interest)
-	(isa ?interest AcademicTopic)
-	(subTopic ?interest ?subtopics)
+	(subTopic ?interest ?subtopics ?distance)
 	(academicAreaOf ?course ?subtopics)
 	(isa ?course NUCourse)
 	;(quarter ?course ?quarter)
@@ -50,12 +41,16 @@
 	(preReq ?prereq ?course)
 	(passedClass ?personID ?course))
 
-(<== (subTopic ?parents ?topic)
-	(directSubTopic ?parents ?topic))
+(<== (subTopicOf ?topic ?topic 0)
+	(equals ?topic ?topic))
 
-(<== (subTopic ?grandparents ?topic)
-	(directSubTopic ?parents ?topic)
- 	(directSubTopic ?grandparents ?parents))
+(<== (subTopicOf ?grandparent ?child ?dis3)
+	(subTopicOf ?parent ?child ?dis1)
+	(subTopicOf ?grandparent ?parent ?dis2)
+	(greaterThanOrEqualTo ?dis1 0)
+	(greaterThanOrEqualTo ?dis1 0)
+	(evaluate ?sum (plusFn ?dis1 ?dis2))
+	(equals ?sum ?dis3))
 
 ;TEST
 (<== (nuGroupMember ?group ?personID)
