@@ -71,6 +71,12 @@
 (arg1Isa academicAreaOf Thing)
 (arg2Isa academicAreaOf AcademicTopic)
 
+(isa preReq Relation)
+(arg1Isa preReq NUCourse)
+(arg2Isa preReq NUCourse)
+(arity preReq 2)
+(comment preReq "Indicates the ARG1 is a prerequisite for ARG2")
+
 ;; Schedule
 ;; ------------------------------------------------------------------------
 ;; (busyDoingAt ?person ?event ?date) ***

@@ -24,14 +24,20 @@
 	(interests ?personID ?interest)
 	(isa ?interest AcademicTopic)
 	(academicAreaOf ?course ?interest)
-	(isa ?course Course-Academic)
+	(isa ?course NUCourse)
 	;(quarter ?course ?quarter)
 	(uninferredSentence (passedClass ?personID ?course))
 	(uninferredSentence (enrolledInClass ?personID ?course)))
 
-(<== (academicAreaOf ?course ?topic)
-	(subTopic ?topic ?subtopic)
-	(academicAreaOf ?course ?subtopic))
+(<== (recommendCourse ?personID ?course) ;add quarter
+	(interests ?personID ?interest)
+	(isa ?interest AcademicTopic)
+	(subTopic ?interest ?subtopics)
+	(academicAreaOf ?course ?subtopics)
+	(isa ?course NUCourse)
+	;(quarter ?course ?quarter)
+	(uninferredSentence (passedClass ?personID ?course))
+	(uninferredSentence (enrolledInClass ?personID ?course)))
 
 ;TEST
 (<== (preReqsSatisfied ?personID ?course)
@@ -44,9 +50,12 @@
 	(preReq ?prereq ?course)
 	(passedClass ?personID ?course))
 
+(<== (subTopic ?parents ?topic)
+	(directSubTopic ?parents ?topic))
+
 (<== (subTopic ?grandparents ?topic)
-	(subTopic ?parents ?topic)
- 	(subTopic ?grandparents ?parents))
+	(directSubTopic ?parents ?topic)
+ 	(directSubTopic ?grandparents ?parents))
 
 ;TEST
 (<== (nuGroupMember ?group ?personID)

@@ -1,7 +1,0 @@
-(in-microtheory TeachingKioskMt)
-
-(isa ComputerScience AcademicTopic)
-(isa ArtificialIntelligence-Topic AcademicTopic)
-(subTopic ComputerScience ArtificialIntelligence-Topic)
-(isa MachineLearning-Topic AcademicTopic)
-(subTopic ArtificialIntelligence-Topic MachineLearning-Topic)
