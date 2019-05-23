@@ -210,11 +210,11 @@ if __name__ == '__main__':
   output = main()
 
   # save scraped tree as json
-  with open('./acm_scraped_fields.json', 'w') as outfile:
+  with open('./acm-scraped-fields.json', 'w') as outfile:
     json.dump(output, outfile, indent=4)
 
   # save small scraped tree as json
-  with open('./acm_scraped_fields_small.json', 'w') as outfile:
+  with open('./acm-scraped-fields-small.json', 'w') as outfile:
     json.dump(get_nodes_at_depth(copy.deepcopy(output), None, 1, 4), outfile, indent=4)
 
   # generate full krf from output
@@ -225,12 +225,12 @@ if __name__ == '__main__':
 
   # generate small krf with depth limit = 3
   level = 3
-  with open('../krf/academic-fields-small_level{}.krf'.format(level), 'w') as f:
+  with open('../krf/academic-fields-small-level{}.krf'.format(level), 'w') as f:
       f.write('(in-microtheory TeachingKioskMt)\n\n')
       f.write('\n'.join(generate_krf_as_list(get_nodes_at_depth(copy.deepcopy(output), None, 1, level), [])))
 
   # generate small krf with depth limit  = 4
   level = 4
-  with open('../krf/academic-fields-small_level{}.krf'.format(level), 'w') as f:
+  with open('../krf/academic-fields-small-level{}.krf'.format(level), 'w') as f:
       f.write('(in-microtheory TeachingKioskMt)\n\n')
       f.write('\n'.join(generate_krf_as_list(get_nodes_at_depth(copy.deepcopy(output), None, 1, level), [])))
