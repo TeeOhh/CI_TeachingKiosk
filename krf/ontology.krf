@@ -37,11 +37,11 @@
 (arg2Isa taForClass Course-Academic)
 
 (isa subTopicOf Predicate)
-(comment subTopicOf "subTopic of is a predicate relating two academic topics and the distance between them (assuming they exist in a graph of topics). For example (subTopicOf CS-Topic MachineLearning-Topic 2) states that ML is a subtopic of CS with a distance of two between them.")
+(comment subTopicOf "subTopic of is a predicate relating two academic topics and the distance between them (assuming they exist in a graph of topics). For example (subTopicOf CS-Topic MachineLearning-Topic 2) states that ML is a subtopic of CS with a distance of two between them. Differs from subTopic in that it has rules for transitivity.")
 (arity subTopicOf 3)
 (arg1Isa subTopicOf Academic-Topic)
 (arg2Isa subTopicOf Academic-Topic)
-(arg3Isa subTopicOf Number)
+(arg3Isa subTopicOf Integer)
 
 ;; Interests
 ;; ------------------------------------------------------------------------

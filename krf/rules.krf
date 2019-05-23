@@ -11,20 +11,17 @@
 ;TEST
 (<== (recommendNUEvent ?personID ?event)
 	(interests ?personID ?topic)
-	(subTopic ?topic ?subtopic)
-	(or (academicAreaOf ?event ?topic)
-		(academicAreaOf ?event ?subtopic))
+	(academicAreaOf ?event ?topic)
 	(isa ?event NUEvent))
 
 ;; give all courses then flag those that, to our knowledge, they haven't passed pre-reqs for?
 
 ;; give only courses that come in following quarter? With option to specify a quarter...
 ;TEST
-(<== (recommendCourse ?personID ?course ?distance) ;distance unbound means get all subtopics
+(<== (recommendCourse ?personID ?course)
 	(interests ?personID ?interest)
 	(isa ?interest AcademicTopic)
-	(subTopic ?interest ?subtopics ?distance)
-	(academicAreaOf ?course ?subtopics)
+	(academicAreaOf ?course ?interest)
 	(isa ?course NUCourse)
 	;(quarter ?course ?quarter)
 	(uninferredSentence (passedClass ?personID ?course))
@@ -41,16 +38,29 @@
 	(preReq ?prereq ?course)
 	(passedClass ?personID ?course))
 
-(<== (subTopicOf ?topic ?topic 0)
-	(equals ?topic ?topic))
+(<== (academicAreaOf ?course ?topic)
+	(subTopicOf ?topic ?subtopic 1)
+	(academicAreaOf ?course ?subtopic))
 
-(<== (subTopicOf ?grandparent ?child ?dis3)
-	(subTopicOf ?parent ?child ?dis1)
-	(subTopicOf ?grandparent ?parent ?dis2)
-	(greaterThanOrEqualTo ?dis1 0)
-	(greaterThanOrEqualTo ?dis1 0)
-	(evaluate ?sum (plusFn ?dis1 ?dis2))
-	(equals ?sum ?dis3))
+(<== (subTopic ?topic ?topic2)
+	(equals ?topic ?topic2))
+
+(<== (subTopic ?topic ?topic2)
+	(subTopicOf ?topic ?topic2 1))
+
+;; general transitvity
+(<== (subTopic ?grandparent ?child)
+	(subTopic ?parent ?child)
+	(subTopic ?grandparent ?parent))
+
+;; controlled depth with transitivity using subTopicOf
+;;(<== (subTopicOf ?topic ?topic2 0)
+;;	(equals ?topic ?topic2))
+
+;;(<== (subTopicOf ?grandparent ?child ?dis3)
+;;	(subTopicOf ?parent ?child ?dis1)
+;;	(subTopicOf ?grandparent ?parent ?dis2)
+;;	(evaluate ?dis3 (PlusFn ?dis1 ?dis2)))
 
 ;TEST
 (<== (nuGroupMember ?group ?personID)
