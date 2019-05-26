@@ -1,8 +1,9 @@
-# data loading and manipulation
 import copy
 import os
-import requests
 import json
+
+import urllib.request
+import ssl
 
 import bs4 as bs
 
@@ -11,13 +12,12 @@ import re
 from nltk.corpus import stopwords
 stops = set(stopwords.words("english"))
 
-import urllib.request
-import ssl
-import html5lib
+# set ssl context
 context = ssl._create_unverified_context()
 
+
 # from https://stackoverflow.com/questions/17850121/parsing-nested-html-list-with-beautifulsoup
-def dictify(ul, parent):
+def dictify(ul):
     result = []
     for li in ul.find_all('li', recursive=False):
         key = next(li.stripped_strings)
@@ -25,9 +25,10 @@ def dictify(ul, parent):
         if ul:
             result.append({
                 'name': key,
-                'children': dictify(ul, key)
+                'children': dictify(ul)
             })
     return result
+
 
 def max_depth(tree, curr_depth):
     # base case: no more children
@@ -64,7 +65,7 @@ def print_nodes_at_depth(tree, parent, curr_depth, desired_depth):
     return
 
 
-def get_nodes_at_depth(tree, parent, curr_depth, desired_depth):
+def get_nodes_at_depth(tree, curr_depth, desired_depth):
     """
     Gets nodes at the desired depth level.
     """
@@ -77,14 +78,16 @@ def get_nodes_at_depth(tree, parent, curr_depth, desired_depth):
         if curr_depth == desired_depth:
             child['children'] = []
         else:
-            get_nodes_at_depth(child['children'], child['name'], curr_depth + 1, desired_depth)
+            get_nodes_at_depth(child['children'], curr_depth + 1, desired_depth)
 
     return tree
 
-def index_of_key(list_of_dicts, field, target):
+
+def key_index(list_of_dicts, field, target):
     for index, curr_dict in enumerate(list_of_dicts):
         if curr_dict[field] == target:
             return index
+
 
 def add_parent(tree, curr_parent=None):
     # base case: no more children
@@ -96,24 +99,28 @@ def add_parent(tree, curr_parent=None):
         child['parent'] = curr_parent
 
         # recurse deeper
-        new_max_depth = add_parent(child['children'], curr_parent=child['name'])
+        add_parent(child['children'], curr_parent=child['name'])
 
     return
 
+
 def clean_topic_name(topic_name):
     # remove any text between parens
-    cleaned_topic_name = re.sub("([\(\[]).*?([\)\]])", "\g<1>\g<2>", topic_name)
+    cleaned_topic_name = re.sub("([(\[]).*?([)\]])", "\g<1>\g<2>", topic_name)
 
-    # remove any puncutation and convert to lowercase
-    cleaned_topic_name = cleaned_topic_name.translate(str.maketrans(string.punctuation, ' ' * len(string.punctuation))).lower()
+    # remove any punctuation and convert to lowercase
+    cleaned_topic_name = cleaned_topic_name.translate(str.maketrans(string.punctuation, ' ' * len(string.punctuation)))
+    cleaned_topic_name = cleaned_topic_name.lower()
 
     # remove stop words and make CamelCase
-    cleaned_topic_name = ''.join([word.title() for word in cleaned_topic_name.split() if not word.isspace() and word not in stops])
+    cleaned_topic_name = ''.join([word.title() for word in cleaned_topic_name.split() if not word.isspace()
+                                  and word not in stops])
 
     # append -Topic to each topic name
     cleaned_topic_name += '-Topic'
 
     return cleaned_topic_name
+
 
 def generate_krf_as_list(tree, krf_list):
     # base case: no more children
@@ -143,94 +150,96 @@ def generate_krf_as_list(tree, krf_list):
 
     return krf_list
 
+
 def main():
-  # check if source is already downloaded
-  css_source_file = './acm_ccs_source.txt'
-  ccs_source = ''
+    # check if source is already downloaded
+    css_source_file = './acm_ccs_source.txt'
+    ccs_source = ''
 
-  if os.path.isfile(css_source_file):
-      with open(css_source_file, 'r') as f:
-          ccs_source = f.read();
-  else:
-      acm_ccs_url = 'https://dl.acm.org/ccs/ccs_flat.cfm#10003120'
-      ccs_source = urllib.request.urlopen(acm_ccs_url, context=context).read()
+    if os.path.isfile(css_source_file):
+        with open(css_source_file, 'r') as f:
+            ccs_source = f.read()
+    else:
+        acm_ccs_url = 'https://dl.acm.org/ccs/ccs_flat.cfm#10003120'
+        ccs_source = urllib.request.urlopen(acm_ccs_url, context=context).read()
 
-  ccs_parsed = bs.BeautifulSoup(ccs_source, 'html5lib')
+    ccs_parsed = bs.BeautifulSoup(ccs_source, 'html5lib')
 
-  # generate output from html parse tree
-  flat_content = ccs_parsed.find('div', id='holdflat').ul
-  output = dictify(flat_content, None)
+    # generate output from html parse tree
+    flat_content = ccs_parsed.find('div', id='holdflat').ul
+    parsed_content = dictify(flat_content)
 
-  # remove general and reference
-  output = [x for x in output if x['name'] != 'General and reference']
+    # remove general and reference
+    parsed_content = [x for x in parsed_content if x['name'] != 'General and reference']
 
-  # add all subfields of HCI into HCI, and replace hcc with hci
-  hcc_index = index_of_key(output, 'name', 'Human-centered computing')
-  hci_index = index_of_key(output[hcc_index]['children'], 'name', 'Human computer interaction (HCI)')
+    # add all subfields of HCI into HCI, and replace hcc with hci
+    hcc_index = key_index(parsed_content, 'name', 'Human-centered computing')
+    hci_index = key_index(parsed_content[hcc_index]['children'], 'name', 'Human computer interaction (HCI)')
 
-  new_hci_children = [child for index, child in enumerate(output[hcc_index]['children']) if index != hci_index]
-  output[hcc_index]['children'][hci_index]['children'] += new_hci_children
+    new_hci_children = [child for i, child in enumerate(parsed_content[hcc_index]['children']) if i != hci_index]
+    parsed_content[hcc_index]['children'][hci_index]['children'] += new_hci_children
 
-  # remove human-centered computing and replace with hci
-  output[hcc_index] = output[hcc_index]['children'][hci_index]
+    # remove human-centered computing and replace with hci
+    parsed_content[hcc_index] = parsed_content[hcc_index]['children'][hci_index]
 
-  # combine stuff under AI and make its own top-level grouping
-  comp_method_index = index_of_key(output, 'name', 'Computing methodologies')
-  ai_index = index_of_key(output[comp_method_index]['children'], 'name', 'Artificial intelligence')
-  symb_index = index_of_key(output[comp_method_index]['children'], 'name', 'Symbolic and algebraic manipulation')
-  ml_index = index_of_key(output[comp_method_index]['children'], 'name', 'Machine learning')
-  modeling_index = index_of_key(output[comp_method_index]['children'], 'name', 'Modeling and simulation')
+    # combine stuff under AI and make its own top-level grouping
+    comp_method_index = key_index(parsed_content, 'name', 'Computing methodologies')
+    ai_index = key_index(parsed_content[comp_method_index]['children'], 'name', 'Artificial intelligence')
+    symb_index = key_index(parsed_content[comp_method_index]['children'], 'name', 'Symbolic and algebraic manipulation')
+    ml_index = key_index(parsed_content[comp_method_index]['children'], 'name', 'Machine learning')
+    modeling_index = key_index(parsed_content[comp_method_index]['children'], 'name', 'Modeling and simulation')
 
-  output[comp_method_index]['children'][ai_index]['children'] += [output[comp_method_index]['children'][symb_index],
-                                                                  output[comp_method_index]['children'][ml_index],
-                                                                  output[comp_method_index]['children'][modeling_index]]
-  output += [output[comp_method_index]['children'][ai_index]]
+    new_ai_children = [parsed_content[comp_method_index]['children'][symb_index],
+                       parsed_content[comp_method_index]['children'][ml_index],
+                       parsed_content[comp_method_index]['children'][modeling_index]]
+    parsed_content[comp_method_index]['children'][ai_index]['children'] += new_ai_children
+    parsed_content += [parsed_content[comp_method_index]['children'][ai_index]]
 
-  # add others from Computing methodologies
-  output += [child for index, child in enumerate(output[comp_method_index]['children'])
-             if index not in set([ai_index, symb_index, ml_index, modeling_index])]
+    # add others from Computing methodologies
+    parsed_content += [child for index, child in enumerate(parsed_content[comp_method_index]['children'])
+                       if index not in {ai_index, symb_index, ml_index, modeling_index}]
 
-  # delete Computing methodologies
-  del output[comp_method_index]
+    # delete Computing methodologies
+    del parsed_content[comp_method_index]
 
-  # put everything under CS
-  output = [{
-      'name': 'ComputerScience',
-      'children': output,
-      'parent': None
-  }]
+    # put everything under CS
+    parsed_content = [{
+        'name': 'ComputerScience',
+        'children': parsed_content,
+        'parent': None
+    }]
 
-  # add parents
-  add_parent(output)
+    # add parents
+    add_parent(parsed_content)
 
-  return output
+    return parsed_content
+
 
 if __name__ == '__main__':
-  # scrape ACM CCS
-  output = main()
+    # scrape ACM CCS
+    output = main()
 
-  # save scraped tree as json
-  with open('./acm-scraped-fields.json', 'w') as outfile:
-    json.dump(output, outfile, indent=4)
+    # save scraped tree as json
+    with open('./acm-scraped-fields.json', 'w') as outfile:
+        json.dump(output, outfile, indent=4)
 
-  # save small scraped tree as json
-  with open('./acm-scraped-fields-small.json', 'w') as outfile:
-    json.dump(get_nodes_at_depth(copy.deepcopy(output), None, 1, 4), outfile, indent=4)
+    # save small scraped tree as json
+    with open('./acm-scraped-fields-small.json', 'w') as outfile:
+        json.dump(get_nodes_at_depth(copy.deepcopy(output), 1, 4), outfile, indent=4)
 
-  # generate full krf from output
-  krf_list = generate_krf_as_list(output, [])
-  with open('../krf/academic-fields.krf', 'w') as f:
-      f.write('(in-microtheory TeachingKioskMt)\n\n')
-      f.write('\n'.join(krf_list))
+    # generate full krf from output
+    with open('../krf/academic-fields.krf', 'w') as outfile:
+        outfile.write('(in-microtheory TeachingKioskMt)\n\n')
+        outfile.write('\n'.join(generate_krf_as_list(output, [])))
 
-  # generate small krf with depth limit = 3
-  level = 3
-  with open('../krf/academic-fields-small-level{}.krf'.format(level), 'w') as f:
-      f.write('(in-microtheory TeachingKioskMt)\n\n')
-      f.write('\n'.join(generate_krf_as_list(get_nodes_at_depth(copy.deepcopy(output), None, 1, level), [])))
+    # generate small krf with depth limit = 3
+    level = 3
+    with open('../krf/academic-fields-small-level{}.krf'.format(level), 'w') as outfile:
+        outfile.write('(in-microtheory TeachingKioskMt)\n\n')
+        outfile.write('\n'.join(generate_krf_as_list(get_nodes_at_depth(copy.deepcopy(output), 1, level), [])))
 
-  # generate small krf with depth limit  = 4
-  level = 4
-  with open('../krf/academic-fields-small-level{}.krf'.format(level), 'w') as f:
-      f.write('(in-microtheory TeachingKioskMt)\n\n')
-      f.write('\n'.join(generate_krf_as_list(get_nodes_at_depth(copy.deepcopy(output), None, 1, level), [])))
+    # generate small krf with depth limit  = 4
+    level = 4
+    with open('../krf/academic-fields-small-level{}.krf'.format(level), 'w') as outfile:
+        outfile.write('(in-microtheory TeachingKioskMt)\n\n')
+        outfile.write('\n'.join(generate_krf_as_list(get_nodes_at_depth(copy.deepcopy(output), 1, level), [])))
