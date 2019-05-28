@@ -1,0 +1,104 @@
+Qtr,Course,Secondary Number,Title,Instructor,Course Topic Area,Days,Start,End,Duration,Historical enrollment
+F,101,,"Computer Science: Concepts, Philosophy, and Connections",Birnbaum,,MWF,14:00,14:50,0:50,
+F,110,,Intro Programming for non-majors,Van Wart,,MWF,10:00,10:50,0:50,45
+S,110,,Intro Programming for non-majors,Van Wart,,MWF,11:00,11:50,0:50,52
+W,110,,Intro Programming for non-majors,Van Wart,,TuTh,16:00,17:20,1:20,46
+F,111,,Fundamentals of Computer Programming 1,Horswill/Wilson,,MWF,13:00,13:50,0:50,310
+S,111,,Fundamentals of Computer Programming 1,Tov,,TuTh,14:00,15:20,1:20,56
+W,111,,Fundamentals of Computer Programming 1,Sood,,MWF,11:00,11:50,0:50,360
+S,130,,Tools and Technologies of the Web,Van Wart,,MW,16:00,16:50,0:50,
+F,211,,Fundamentals of Computer Programming 2,Sood,,TuTh,12:30,13:50,1:20,91
+S,211,,Fundamentals of Computer Programming 2,Sood,,TuTh,12:30,13:50,1:20,203
+W,211,,Fundamentals of Computer Programming 2,Tov,,TuTh,14:00,15:20,1:20,155
+F,212,,Discrete math,Vijayaraghavan,,MWF,15:00,15:50,0:50,95
+S,212,,Discrete math,Vijayaraghavan,,MWF,15:00,15:50,0:50,111
+W,212,,Discrete math,STAFF,,MWF,16:00,16:50,0:50,55
+F,213,,Intro to Computer Systems,St-Amour,,TuTh,15:30,16:50,1:20,91
+F,213,,Intro to Computer Systems,Dinda,,TuTh,14:00,15:20,1:20,85
+S,213,,Intro to Computer Systems,Hardavellas,,TuTh,14:00,15:20,1:20,53
+W,213,,Intro to Computer Systems,St-Amour,,TuTh,12:30,13:50,1:20,91
+F,214,,Data structures,Tov,,TuTh,9:30,10:50,1:20,89
+S,214,,Data structures,Horswill,,MWF,13:00,13:50,0:50,222
+W,214,,Data structures,St-Amour,,TuTh,16:00,17:20,1:20,
+F,217,,Data management and information processing,STAFF,,TuTh,12:30,13:50,1:20,41
+S,217,,Data management and information processing,STAFF,,TuTh,14:00,15:20,1:20,56
+W,230,,Programming for engineers,Tov,,TuTh,12:30,13:50,1:20,36
+F,295,,Intensive Program Design,Tov/Findler,,TuTh,12:00,14:50,2:50,12
+S,295,,Fundamentals of Programming 1.5,Sood,,MWF,11:00,11:50,0:50,49
+S,301,,Intro to Robotics Laboratory,Argall,,TuTh,14:00,18:00,4:00,
+S,313,413,Tangible Interaction Design and Learning,Horn,,TuTh,15:30,16:50,1:20,24
+S,314,,Tech & Human Interaction,Gergle,,TuTh,9:30,10:50,1:20,21
+F,315,497,Design Technology & Research,Zhang,,F,,,,
+S,315,497,Design Technology & Research,Zhang,,F,,,,
+W,315,497,Design Technology & Research,Zhang,,F,,,,
+F,321,,Programming languages,St-Amour,,TuTh,11:00,12:20,1:20,
+S,321,,Programming languages,St-Amour,,TuTh,11:00,12:20,1:20,65
+W,321,,Programming languages,Findler,,TuTh,11:00,12:20,1:20,65
+W,322,,Compilers,Campanoni,,MWF,11:00,11:50,0:50,20
+S,323,,Code Analysis and Transformation,Campanoni,,TuTh,12:30,13:50,1:20,
+F,330,,Human-Computer Interaction,Worsley,,MW,11:00,11:50,0:50,
+S,330,,Human-Computer Interaction,Horn,,MWF,11:00,11:50,0:50,317
+W,330,,Human-Computer Interaction,Van Wart,,MWF,13:00,13:50,0:50,210
+F,331,,Intro to Computation Phototography,Cossairt,,TuTh,15:30,16:50,1:20,36
+F,336,,Design and Analysis of Algorithms,Hartline,,TuTh,14:00,15:20,1:20,
+S,336,,Design and Analysis of Algorithms,Khuller,,TuTh,9:30,10:50,1:20,85
+W,336,,Design and Analysis of Algorithms,Makarychev,,TuTh,11:00,12:20,1:20,99
+W,337,,Intro to Natural Language Processing,Birnbaum,,MWF,11:00,11:50,0:50,71
+F,338,,Practicum in Intelligence Information Systems,Birnbaum,,W,6:00,9:00,3:00,48
+S,338,,Practicum in Intelligence Information Systems,Birnbaum,,M,6:00,9:00,3:00,48
+S,339,,Intro to Databases,Rogers,,TuTh,15:30,16:50,1:20,61
+W,339,,Intro to Databases,Rogers,,TuTh,15:30,16:50,1:20,61
+F,340,,Networking,Bustamante,,MW,11:00,12:20,1:20,67
+W,340,,Networking,Tarzia,,MWF,13:00,13:50,0:50,30
+S,343,,Operating Systems,Tarzia,,MWF,13:00,13:50,0:50,86
+W,343,,Operating Systems,Dinda,,TuTh,11:00,11:50,0:50,48
+S,345,,Distributed Systems,Bustamante,,TuTh,9:00,10:20,1:20,29
+F,348,,Intro to Artificial Intelligence,Hammond,,MWF,16:00,16:50,0:50,127
+S,348,,Intro to Artificial Intelligence,Rubenstein,,TuTh,12:30,13:50,1:20,73
+W,348,,Intro to Artificial Intelligence,Wilson,,MWF,15:00,15:50,0:50,122
+F,349,,Machine Learning,Seetharaman/Pardo,,MW,15:30,16:50,1:20,61
+S,349,,Machine Learning,Seetharaman/Pardo,,MW,15:30,16:50,1:20,61
+W,354,,Network Penetration and Security,Chen,,TuTh,9:30,10:50,1:20,
+F,376,,Game Design and Development,Horswill,,MWF,15:00,15:50,0:50,105
+F,393,,Software Construction,Dimoulas,,TuTh,14:00,15:20,1:20,36
+S,394,,Software Project Management and Development,Riesbeck,,TuTh,11:00,12:20,1:20,36
+W,394,,Software Project Management and Development,Riesbeck,,TuTh,11:00,12:20,1:20,18
+F,396,496,Interactive Information Visualization,Hullman,,TuTh,9:30,10:50,1:20,18
+F,396,,Scalable software architectures,Tarzia,,MW,15:30,16:50,1:20,3
+F,396,496,Swarms and Multi-Robot Systems,Rubenstein,,TuTh,14:00,15:20,1:20,6
+F,396,496,Data Science Seminar,Rogers,,TuTh,15:30,16:50,1:20,4
+S,396,496,Operational Semantics,Dimoulas,,TuTh,12:30,13:50,1:20,12
+S,396,496,Systems Programming in Rust,Tov,,TuTh,12:30,13:50,1:20,15
+S,396,496,Affective Computing Seminar,Wilson,,TuTh,11:00,12:20,1:20,
+S,396,496,TBD,Findler,,TuTh,11:00,12:20,1:20,3
+S,396,496,Topics in Software Engineering,St-Amour,,TuTh,3:30,4:50,1:20,3
+S,396,,Online Markets,Hartline,,TuTh,9:30,10:50,1:20,
+W,396,,Introduction to cryptography,Wang,,TuTh,9:30,10:50,1:20,18
+W,396,496,Quadrotor design and control,Rubenstein,,Th,13:00,16:00,3:00,8
+W,396,496,Programming Language Seminar,Dimoulas,,TuTh,12:30,13:50,1:20,3
+F,397,497,Advanced topics in compilers,Campanoni,,TuTh,9:30,10:50,1:20,3
+F,397,497,Innovation in Journalism,Wise/Hammond,,TuTh,14:30,16:20,2:20,
+F,397,497,Inclusive Making,Worsley,,Tu,9:30,12:20,2:50,
+F,397,497,Computational Creativity,Pardo,,Th,13:00,16:00,3:00,
+F,397,497,Rapid Prototyping for Software Innovation,Van Wart,,MWF,13:00,13:50,0:50,
+S,397,497,Digital Musical Instrument Design,Pardo,,M,3:00,6:00,3:00,13
+S,397,497,Comp. Photography Seminar,Cossairt,,MWF,16:00,19:00,3:00,13
+W,397,497,Game Design Studio,Zubek,,MW,18:00,19:30,1:30,44
+W,397,497,Digital Forensics,Chen,,MW,10:00,11:20,1:20,20
+W,397,497,Internet-Scale Experimentation,Bustamante,,MW,10:00,13:00,3:00,13
+W,397,497,Wireless and Mobile Health,Alshurafa,,TuTh,5:00,6:20,1:20,16
+S,446,,Kernel and Other Low-level Software Development,Dinda,,TuTh,9:30,10:50,1:20,
+W,450,450,Internet Security,Chen,,TuTh,15:30,16:50,1:20,
+F,469,,Machine Learning & Artificial Intelligence for Robotics,Argall,,TuTh,11:00,12:20,1:20,
+F,496,,Graduate Complexity,Xue,,TuTh,10:00,11:20,1:20,18
+F,496,,Modern cryptography,Wang,,TuTh,9:30,10:50,1:20,18
+F,496,,Advanced topics in Theoretical CS,Vijayaraghavan,,F,10:00,12:30,2:50,
+S,496,,Special Topics in Game AI,Horswill,,MWF,16:00,16:50,0:50,18
+S,496,,Grad Algorithms,Makarychev,,MWF,11:00,11:50,0:50,
+S,496,,Advanced Topics in Approximation Algorithms,Makarychev,,MWF,15:00,15:50,0:50,
+W,496,,Advanced Topics in Mechanism Design,Hartline,,TuTh,9:30,10:50,1:20,
+F,325-1,,Artificial Intelligence Programming,Riesbeck,,MWF,11:00,11:50,0:50,67
+F,351-1,,Intro to Computer Graphics,Tumblin,,MWF,10:00,10:50,0:50,45
+W,351-2,496,Intermediate Computer Graphics,Tumblin,,TuTh,9:30,10:50,1:20,2
+W,473-1,,NUVention Web+Media,Riesbeck/Warren,,Tu,14:00,17:00,3:00,17
+S,473-2,,NUVention Web+Media,Riesbeck/Warren,,Tu,14:00,17:10,3:10,17

@@ -153,7 +153,7 @@ def generate_krf_as_list(tree, krf_list):
 
 def scrape_and_parse_page():
     # check if source is already downloaded
-    css_source_file = './acm_ccs_source.txt'
+    css_source_file = '../data/acm_ccs_source.txt'
     ccs_source = ''
 
     if os.path.isfile(css_source_file):
