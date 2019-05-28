@@ -37,6 +37,27 @@
      (uninferredSentence (passedClass ?personID ?course))
      (uninferredSentence (enrolledInClass ?personID ?course)))
 
+(<== (expertInAcademicTopic ?personID ?topic)
+	(academicTopicOf ?course ?topic)
+	(courseInstructor ?personID ?course))
+
+(<== (expertInAcademicTopic ?personID ?topic)
+	(subTopic ?topic ?subtopic)
+	(academicTopicOf ?course ?subtopic)
+	(isa ?course NUCourse)
+	(courseInstructor ?personID ?course))
+
+(<== (expertInAcademicTopic ?personID ?topic)
+	(academicTopicOf ?group ?topic)
+	(isa ?group NUGroup)
+	(nuGroupMember ?group ?personID))
+
+(<== (expertInAcademicTopic ?personID ?topic)
+	(subTopic ?topic ?subtopic)
+	(academicTopicOf ?course ?subtopic)
+	(isa ?course NUCourse)
+	(courseInstructor ?personID ?course))
+
 ;TEST
 (<== (preReqsSatisfied ?personID ?course)
 	(preReq ?prereq ?course)
