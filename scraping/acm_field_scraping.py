@@ -220,11 +220,11 @@ if __name__ == '__main__':
     output = main()
 
     # save scraped tree as json
-    with open('./acm-scraped-fields.json', 'w') as outfile:
+    with open('../json/acm-scraped-fields.json', 'w') as outfile:
         json.dump(output, outfile, indent=4)
 
     # save small scraped tree as json
-    with open('./acm-scraped-fields-small.json', 'w') as outfile:
+    with open('../json/acm-scraped-fields-small.json', 'w') as outfile:
         json.dump(get_nodes_at_depth(copy.deepcopy(output), 1, 4), outfile, indent=4)
 
     # generate full krf from output
