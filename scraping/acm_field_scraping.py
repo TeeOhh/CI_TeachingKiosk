@@ -151,7 +151,7 @@ def generate_krf_as_list(tree, krf_list):
     return krf_list
 
 
-def main():
+def scrape_and_parse_page():
     # check if source is already downloaded
     css_source_file = './acm_ccs_source.txt'
     ccs_source = ''
@@ -215,31 +215,35 @@ def main():
     return parsed_content
 
 
-if __name__ == '__main__':
+def main():
     # scrape ACM CCS
-    output = main()
+    scraped_data = scrape_and_parse_page()
 
     # save scraped tree as json
     with open('../json/acm-scraped-fields.json', 'w') as outfile:
-        json.dump(output, outfile, indent=4)
+        json.dump(scraped_data, outfile, indent=4)
 
     # save small scraped tree as json
     with open('../json/acm-scraped-fields-small.json', 'w') as outfile:
-        json.dump(get_nodes_at_depth(copy.deepcopy(output), 1, 4), outfile, indent=4)
+        json.dump(get_nodes_at_depth(copy.deepcopy(scraped_data), 1, 4), outfile, indent=4)
 
-    # generate full krf from output
+    # generate full krf from scraped_data
     with open('../krf/academic-fields.krf', 'w') as outfile:
         outfile.write('(in-microtheory TeachingKioskMt)\n\n')
-        outfile.write('\n'.join(generate_krf_as_list(output, [])))
+        outfile.write('\n'.join(generate_krf_as_list(scraped_data, [])))
 
     # generate small krf with depth limit = 3
     level = 3
     with open('../krf/academic-fields-small-level{}.krf'.format(level), 'w') as outfile:
         outfile.write('(in-microtheory TeachingKioskMt)\n\n')
-        outfile.write('\n'.join(generate_krf_as_list(get_nodes_at_depth(copy.deepcopy(output), 1, level), [])))
+        outfile.write('\n'.join(generate_krf_as_list(get_nodes_at_depth(copy.deepcopy(scraped_data), 1, level), [])))
 
     # generate small krf with depth limit  = 4
     level = 4
     with open('../krf/academic-fields-small-level{}.krf'.format(level), 'w') as outfile:
         outfile.write('(in-microtheory TeachingKioskMt)\n\n')
-        outfile.write('\n'.join(generate_krf_as_list(get_nodes_at_depth(copy.deepcopy(output), 1, level), [])))
+        outfile.write('\n'.join(generate_krf_as_list(get_nodes_at_depth(copy.deepcopy(scraped_data), 1, level), [])))
+
+
+if __name__ == '__main__':
+  main()

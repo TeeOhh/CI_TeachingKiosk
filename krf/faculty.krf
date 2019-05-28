@@ -618,7 +618,7 @@
 (titleOfPerson StephenTarzia Dr)
 (phoneNumberOf StephenTarzia "847-491-7069")
 (emailOf StephenTarzia "tarzia@northwestern.edu")
-(officeLocation StephenTarzia "Tech Room L360")
+(officeLocation StephenTarzia "Mudd Room 3225")
 (in-microtheory EnglishMt)
 (fullName StephenTarzia "Stephen Tarzia")
 (indexedProperName (TheList professor) Tarzia StephenTarzia)
