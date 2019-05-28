@@ -72,11 +72,11 @@
 (arg1Isa preReqsSatisfied NUPerson)
 (arg2Isa preReqsSatisfied NUCourse)
 
-(isa academicAreaOf Predicate)
-(comment academicAreaOf "A predicate relating a thing to it's academic area. Intended to be used with courses, talks, meetings, etc. ex: (academicAreaOf NUEvent-2018-May-23-Economics501GraduateStudentSem Economics)")
-(arity academicAreaOf 2)
-(arg1Isa academicAreaOf Thing)
-(arg2Isa academicAreaOf AcademicTopic)
+(isa academicTopicOf Predicate)
+(comment academicTopicOf "A predicate relating a thing to it's academic area. Intended to be used with courses, talks, meetings, etc. ex: (academicTopicOf NUEvent-2018-May-23-Economics501GraduateStudentSem Economics)")
+(arity academicTopicOf 2)
+(arg1Isa academicTopicOf Thing)
+(arg2Isa academicTopicOf AcademicTopic)
 
 (isa preReq Predicate)
 (arg1Isa preReq NUCourse)
@@ -91,3 +91,14 @@
 ;; Reminders/Alerts
 ;; ------------------------------------------------------------------------
 ;; (alertPerson ?person ?thing) ***
+
+;; Formatting
+;; ------------------------------------------------------------------------
+(prettyString ComputerGraphics-Topic "Computer Graphics")
+(prettyString AcademicTopic "academic topic at university")
+(prettyString Academic-Topic "academic topic at university")
+(indexedProperName (TheList) graphicss ComputerGraphics-Topic)
+(indexedProperName (TheList computer) graphicss ComputerGraphics-Topic)
+(indexedProperName (TheList the computer graphicss) subtopic ComputerGraphics-Topic)
+(indexedProperName (TheList the computer graphicss) topic ComputerGraphics-Topic)
+(indexedProperName (TheList the graphicss) topic ComputerGraphics-Topic)
