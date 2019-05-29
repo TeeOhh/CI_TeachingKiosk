@@ -34,18 +34,18 @@
      ;(quarterOf ?course ?quarter)
      (subTopic ?interest ?subtopic)
      (academicTopicOf ?course ?subtopic)
-     (uninferredSentence (passedClass ?personID ?course))
-     (uninferredSentence (enrolledInClass ?personID ?course)))
+     (uninferredSentence (passedClass ?course ?personID))
+     (uninferredSentence (enrolledInClass ?course ?personID)))
 
 (<== (expertInAcademicTopic ?personID ?topic)
 	(academicTopicOf ?course ?topic)
-	(courseInstructor ?personID ?course))
+	(courseInstructor ?course ?personID))
 
 (<== (expertInAcademicTopic ?personID ?topic)
 	(subTopic ?topic ?subtopic)
 	(academicTopicOf ?course ?subtopic)
 	(isa ?course NUCourse)
-	(courseInstructor ?personID ?course))
+	(courseInstructor ?course ?personID))
 
 (<== (expertInAcademicTopic ?personID ?topic)
 	(academicTopicOf ?group ?topic)
@@ -56,18 +56,18 @@
 	(subTopic ?topic ?subtopic)
 	(academicTopicOf ?course ?subtopic)
 	(isa ?course NUCourse)
-	(courseInstructor ?personID ?course))
+	(courseInstructor ?course ?personID))
 
 ;TEST
-(<== (preReqsSatisfied ?personID ?course)
+(<== (preReqsSatisfied ?course ?personID)
 	(preReq ?prereq ?course)
-	(passedClass ?personID ?prereq))
+	(passedClass ?prereq ?personID))
 
 ;; if a student has passed a course with pre-reqs, assume they've passed pre-reqs
 ;TEST
-(<== (passedClass ?personID ?prereq)
+(<== (passedClass ?prereq ?personID)
 	(preReq ?prereq ?course)
-	(passedClass ?personID ?course))
+	(passedClass ?course ?personID))
 
 ;; base case
 (<== (subTopic ?topic ?topic2)
@@ -126,7 +126,7 @@
 	(nuGroupMember NUComputerEngineering ?personID))
 
 ;;(<== (busyDoingAt ?personID ?class ?at)
-;;	(enrolledInClass ?personID ?class)
+;;	(enrolledInClass ?class ?personID)
 ;;	(timeIntervalOf ?class ?at))
 
 ;;(<== (busyDoingAt ?personID ?class ?at)
@@ -134,7 +134,7 @@
 ;;	(timeIntervalOf ?class ?at))
 
 ;;(<== (busyDoingAt ?personID ?class ?at)
-;;	(taForClass ?personID ?class)
+;;	(taForClass ?class ?personID)
 ;;	(timeIntervalOf ?class ?at))
 
 ;;(<== (busyDoingAt ?personID ?club ?at)

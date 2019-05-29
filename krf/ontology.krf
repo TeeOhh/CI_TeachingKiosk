@@ -39,10 +39,10 @@
 
 
 (isa taForClass Predicate)
-(comment taForClass "taForClass is a predicate relating a NUPerson to a class that he/she is currenting TA'ing for. For example: (taForClass JacobTaylor SystemTheory-Fall2018) = Jacob Taylor is currently TA'ing for System Theory")
+(comment taForClass "taForClass is a predicate relating a NUPerson to a class that he/she is currenting TA'ing for. For example: (taForClass SystemTheory-Fall2018 JacobTaylor) = Jacob Taylor is currently TA'ing for System Theory")
 (arity taForClass 2)
-(arg1Isa taForClass NUPerson)
-(arg2Isa taForClass NUCourse)
+(arg1Isa taForClass NUCourse)
+(arg2Isa taForClass NUPerson)
 
 (isa subTopicOf Predicate)
 (comment subTopicOf "subTopic of is a predicate relating two academic topics and the distance between them (assuming they exist in a graph of topics). For example (subTopicOf CS-Topic MachineLearning-Topic 2) states that ML is a subtopic of CS with a distance of two between them. Differs from subTopic in that it has rules for transitivity.")
@@ -63,22 +63,22 @@
 ;; Courses
 ;; ------------------------------------------------------------------------
 (isa passedClass Predicate)
-(comment passedClass "passedClass is a predicate relating an Agent-Generic to a course he/she has passed. For example: (advisorOf JacobTaylor SystemTheory-Fall2018) = Bob Smith has passed SystemTheory")
+(comment passedClass "passedClass is a predicate relating an Agent-Generic to a course he/she has passed. For example: (passedClass SystemTheory-Fall2018 JacobTaylor) = Bob Smith has passed SystemTheory")
 (arity passedClass 2)
-(arg1Isa passedClass NUPerson)
-(arg2Isa passedClass NUCourse)
+(arg1Isa passedClass NUCourse)
+(arg2Isa passedClass NUPerson)
 
 (isa enrolledInClass Predicate)
-(comment enrolledInClass "enrolledInClass is a predicate relating an Agent-Generic to a course he/she is currently enrolled in. For example: (advisorOf JacobTaylor SystemTheory-Fall2018) = Bob Smith is currently taking SystemTheory")
+(comment enrolledInClass "enrolledInClass is a predicate relating an Agent-Generic to a course he/she is currently enrolled in. For example: (enrolledInClass SystemTheory-Fall2018 JacobTaylor) = Jacob Taylor is currently taking SystemTheory")
 (arity enrolledInClass 2)
-(arg1Isa enrolledInClass NUPerson)
-(arg2Isa enrolledInClass NUCourse)
+(arg1Isa enrolledInClass NUCourse)
+(arg2Isa enrolledInClass NUPerson)
 
 (isa preReqsSatisfied Predicate)
-(comment preReqsSatisfied "A predicate relating an agent to a course that it has satisfied the pre-requistites for. ex: (preReqsSatisfied JacobTaylor SystemTheory-Fall2018) = JacobTaylor has satisfied all of the pre-reqs for System Theory")
+(comment preReqsSatisfied "A predicate relating an agent to a course that it has satisfied the pre-requistites for. ex: (preReqsSatisfied SystemTheory-Fall2018 JacobTaylor) = JacobTaylor has satisfied all of the pre-reqs for System Theory")
 (arity preReqsSatisfied 2)
-(arg1Isa preReqsSatisfied NUPerson)
-(arg2Isa preReqsSatisfied NUCourse)
+(arg1Isa preReqsSatisfied NUCourse)
+(arg2Isa preReqsSatisfied NUPerson)
 
 (isa academicTopicOf Predicate)
 (comment academicTopicOf "A predicate relating a thing to it's academic area. Intended to be used with courses, talks, meetings, etc. ex: (academicTopicOf NUEvent-2018-May-23-Economics501GraduateStudentSem Economics)")
