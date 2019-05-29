@@ -42,7 +42,7 @@
 (comment taForClass "taForClass is a predicate relating a NUPerson to a class that he/she is currenting TA'ing for. For example: (taForClass JacobTaylor SystemTheory-Fall2018) = Jacob Taylor is currently TA'ing for System Theory")
 (arity taForClass 2)
 (arg1Isa taForClass NUPerson)
-(arg2Isa taForClass Course-Academic)
+(arg2Isa taForClass NUCourse)
 
 (isa subTopicOf Predicate)
 (comment subTopicOf "subTopic of is a predicate relating two academic topics and the distance between them (assuming they exist in a graph of topics). For example (subTopicOf CS-Topic MachineLearning-Topic 2) states that ML is a subtopic of CS with a distance of two between them. Differs from subTopic in that it has rules for transitivity.")
