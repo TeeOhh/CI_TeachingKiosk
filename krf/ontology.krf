@@ -30,8 +30,16 @@
 
 ;; (courseInstructor ?course ?teacher)
 
+;; EXPERT IN
+(isa expertInAcademicTopic Predicate)
+(comment expertInAcademicTopic "expertInAcademicTopic is a predicate relating a NUPerson to a academic topic they are an expert in (teaching a course that covers the topic, heading a lab in that academic area, etc.)")
+(arity expertInAcademicTopic 2)
+(arg1Isa expertInAcademicTopic NUPerson)
+(arg2Isa expertInAcademicTopic AcademicTopic)
+
+
 (isa taForClass Predicate)
-(comment taForClass "taForClass is a predicate relating an Agent-Generic to a class that he/she is currenting TA'ing for. For example: (taForClass JacobTaylor SystemTheory-Fall2018) = Jacob Taylor is currently TA'ing for System Theory")
+(comment taForClass "taForClass is a predicate relating a NUPerson to a class that he/she is currenting TA'ing for. For example: (taForClass JacobTaylor SystemTheory-Fall2018) = Jacob Taylor is currently TA'ing for System Theory")
 (arity taForClass 2)
 (arg1Isa taForClass NUPerson)
 (arg2Isa taForClass Course-Academic)
@@ -39,8 +47,8 @@
 (isa subTopicOf Predicate)
 (comment subTopicOf "subTopic of is a predicate relating two academic topics and the distance between them (assuming they exist in a graph of topics). For example (subTopicOf CS-Topic MachineLearning-Topic 2) states that ML is a subtopic of CS with a distance of two between them. Differs from subTopic in that it has rules for transitivity.")
 (arity subTopicOf 3)
-(arg1Isa subTopicOf Academic-Topic)
-(arg2Isa subTopicOf Academic-Topic)
+(arg1Isa subTopicOf AcademicTopic)
+(arg2Isa subTopicOf AcademicTopic)
 (arg3Isa subTopicOf Integer)
 
 ;; Interests
@@ -72,11 +80,11 @@
 (arg1Isa preReqsSatisfied NUPerson)
 (arg2Isa preReqsSatisfied NUCourse)
 
-(isa academicAreaOf Predicate)
-(comment academicAreaOf "A predicate relating a thing to it's academic area. Intended to be used with courses, talks, meetings, etc. ex: (academicAreaOf NUEvent-2018-May-23-Economics501GraduateStudentSem Economics)")
-(arity academicAreaOf 2)
-(arg1Isa academicAreaOf Thing)
-(arg2Isa academicAreaOf AcademicTopic)
+(isa academicTopicOf Predicate)
+(comment academicTopicOf "A predicate relating a thing to it's academic area. Intended to be used with courses, talks, meetings, etc. ex: (academicTopicOf NUEvent-2018-May-23-Economics501GraduateStudentSem Economics)")
+(arity academicTopicOf 2)
+(arg1Isa academicTopicOf Thing)
+(arg2Isa academicTopicOf AcademicTopic)
 
 (isa preReq Predicate)
 (arg1Isa preReq NUCourse)
@@ -91,3 +99,14 @@
 ;; Reminders/Alerts
 ;; ------------------------------------------------------------------------
 ;; (alertPerson ?person ?thing) ***
+
+;; Formatting
+;; ------------------------------------------------------------------------
+(prettyString ComputerGraphics-Topic "Computer Graphics")
+(prettyString AcademicTopic "academic topic at university")
+(prettyString AcademicTopic "academic topic at university")
+(indexedProperName (TheList) graphicss ComputerGraphics-Topic)
+(indexedProperName (TheList computer) graphicss ComputerGraphics-Topic)
+(indexedProperName (TheList the computer graphicss) subtopic ComputerGraphics-Topic)
+(indexedProperName (TheList the computer graphicss) topic ComputerGraphics-Topic)
+(indexedProperName (TheList the graphicss) topic ComputerGraphics-Topic)

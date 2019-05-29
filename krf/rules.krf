@@ -11,7 +11,7 @@
 ;TEST
 (<== (recommendNUEvent ?personID ?event)
 	(interests ?personID ?topic)
-	(academicAreaOf ?event ?topic)
+	(academicTopicOf ?event ?topic)
 	(isa ?event NUEvent))
 
 ;; give all courses then flag those that, to our knowledge, they haven't passed pre-reqs for?
@@ -23,7 +23,7 @@
      (isa ?interest AcademicTopic)
      (isa ?course NUCourse)
      ;(quarterOf ?course ?quarter)
-     (academicAreaOf ?course ?interest)
+     (academicTopicOf ?course ?interest)
      (uninferredSentence (passedClass ?personID ?course))
      (uninferredSentence (enrolledInClass ?personID ?course)))
 
@@ -33,9 +33,30 @@
      (isa ?course NUCourse)
      ;(quarterOf ?course ?quarter)
      (subTopic ?interest ?subtopic)
-     (academicAreaOf ?course ?subtopic)
+     (academicTopicOf ?course ?subtopic)
      (uninferredSentence (passedClass ?personID ?course))
      (uninferredSentence (enrolledInClass ?personID ?course)))
+
+(<== (expertInAcademicTopic ?personID ?topic)
+	(academicTopicOf ?course ?topic)
+	(courseInstructor ?personID ?course))
+
+(<== (expertInAcademicTopic ?personID ?topic)
+	(subTopic ?topic ?subtopic)
+	(academicTopicOf ?course ?subtopic)
+	(isa ?course NUCourse)
+	(courseInstructor ?personID ?course))
+
+(<== (expertInAcademicTopic ?personID ?topic)
+	(academicTopicOf ?group ?topic)
+	(isa ?group NUGroup)
+	(nuGroupMember ?group ?personID))
+
+(<== (expertInAcademicTopic ?personID ?topic)
+	(subTopic ?topic ?subtopic)
+	(academicTopicOf ?course ?subtopic)
+	(isa ?course NUCourse)
+	(courseInstructor ?personID ?course))
 
 ;TEST
 (<== (preReqsSatisfied ?personID ?course)
