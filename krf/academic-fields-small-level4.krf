@@ -1,5 +1,16 @@
 (in-microtheory TeachingKioskMt)
 
+;; Formatting Example
+;; ------------------------------------------------------------------------
+(prettyString ComputerGraphics-Topic "Computer Graphics")
+(prettyString AcademicTopic "academic topic at university")
+(prettyString AcademicTopic "academic topic at university")
+(indexedProperName (TheList) graphicss ComputerGraphics-Topic)
+(indexedProperName (TheList computer) graphicss ComputerGraphics-Topic)
+(indexedProperName (TheList the computer graphicss) subtopic ComputerGraphics-Topic)
+(indexedProperName (TheList the computer graphicss) topic ComputerGraphics-Topic)
+(indexedProperName (TheList the graphicss) topic ComputerGraphics-Topic)
+
 (isa ComputerScience AcademicTopic)
 (isa Hardware-Topic AcademicTopic)
 (subTopicOf ComputerScience Hardware-Topic 1)

@@ -12,7 +12,7 @@
 (in-microtheory TeachingKioskMt)
 (isa TeachingKioskMt Microtheory)
 (genlMt TeachingKioskMt SocialModelingEnglishMt)
-(comment TeachingKioskMt "TeachingKioskMt contains the user model, user/course Predicates, and the ontology of academic topics.")
+(comment TeachingKioskMt "TeachingKioskMt contains the user model, user/course Predicates, and the ontology of academic topics and courses.")
 
 (isa NUPhDStudent AcademicProfessional)
 
@@ -28,24 +28,14 @@
 (arg1Isa advisorOf NUPhDStudent)
 (arg2Isa advisorOf NUFaculty)
 
-;; (courseInstructor ?course ?teacher)
-
-;; EXPERT IN
 (isa expertInAcademicTopic Predicate)
 (comment expertInAcademicTopic "expertInAcademicTopic is a predicate relating a NUPerson to a academic topic they are an expert in (teaching a course that covers the topic, heading a lab in that academic area, etc.)")
 (arity expertInAcademicTopic 2)
 (arg1Isa expertInAcademicTopic NUPerson)
 (arg2Isa expertInAcademicTopic AcademicTopic)
 
-
-(isa taForClass Predicate)
-(comment taForClass "taForClass is a predicate relating a NUPerson to a class that he/she is currenting TA'ing for. For example: (taForClass SystemTheory-Fall2018 JacobTaylor) = Jacob Taylor is currently TA'ing for System Theory")
-(arity taForClass 2)
-(arg1Isa taForClass NUCourse)
-(arg2Isa taForClass NUPerson)
-
 (isa subTopicOf Predicate)
-(comment subTopicOf "subTopic of is a predicate relating two academic topics and the distance between them (assuming they exist in a graph of topics). For example (subTopicOf CS-Topic MachineLearning-Topic 2) states that ML is a subtopic of CS with a distance of two between them. Differs from subTopic in that it has rules for transitivity.")
+(comment subTopicOf "subTopicOf is a predicate relating two academic topics and the distance between them (assuming they exist in a graph of topics). For example (subTopicOf CS-Topic MachineLearning-Topic 2) states that ML is a subtopic of CS with a distance of two between them. Differs from subTopic in that it has rules for transitivity.")
 (arity subTopicOf 3)
 (arg1Isa subTopicOf AcademicTopic)
 (arg2Isa subTopicOf AcademicTopic)
@@ -68,6 +58,12 @@
 (arg1Isa passedClass NUCourse)
 (arg2Isa passedClass NUPerson)
 
+(isa taForClass Predicate)
+(comment taForClass "taForClass is a predicate relating a NUPerson to a class that he/she is currenting TA'ing for. For example: (taForClass SystemTheory-Fall2018 JacobTaylor) = Jacob Taylor is currently TA'ing for System Theory")
+(arity taForClass 2)
+(arg1Isa taForClass NUCourse)
+(arg2Isa taForClass NUPerson)
+
 (isa enrolledInClass Predicate)
 (comment enrolledInClass "enrolledInClass is a predicate relating an Agent-Generic to a course he/she is currently enrolled in. For example: (enrolledInClass SystemTheory-Fall2018 JacobTaylor) = Jacob Taylor is currently taking SystemTheory")
 (arity enrolledInClass 2)
@@ -87,10 +83,10 @@
 (arg2Isa academicTopicOf AcademicTopic)
 
 (isa preReq Predicate)
+(comment preReq "A predicate indiciating that ARG1 is a prerequisite for ARG2.)
+(arity preReq 2)
 (arg1Isa preReq NUCourse)
 (arg2Isa preReq NUCourse)
-(arity preReq 2)
-(comment preReq "Indicates the ARG1 is a prerequisite for ARG2")
 
 ;; Schedule
 ;; ------------------------------------------------------------------------
@@ -99,14 +95,3 @@
 ;; Reminders/Alerts
 ;; ------------------------------------------------------------------------
 ;; (alertPerson ?person ?thing) ***
-
-;; Formatting
-;; ------------------------------------------------------------------------
-(prettyString ComputerGraphics-Topic "Computer Graphics")
-(prettyString AcademicTopic "academic topic at university")
-(prettyString AcademicTopic "academic topic at university")
-(indexedProperName (TheList) graphicss ComputerGraphics-Topic)
-(indexedProperName (TheList computer) graphicss ComputerGraphics-Topic)
-(indexedProperName (TheList the computer graphicss) subtopic ComputerGraphics-Topic)
-(indexedProperName (TheList the computer graphicss) topic ComputerGraphics-Topic)
-(indexedProperName (TheList the graphicss) topic ComputerGraphics-Topic)
