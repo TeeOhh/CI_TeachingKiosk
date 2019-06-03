@@ -53,7 +53,8 @@
 (<== (expertInAcademicTopic ?person ?topic)
 	(academicTopicOf ?group ?topic)
 	(nuGroupMember ?group ?person)
-	(isa ?group NUGroup))
+	(isa ?group NUGroup)
+	(isa ?person NUStaff))
 
 ;; One who is in a research lab that focuses on a certain topic, is an expert in all general topics of that topic.
 ;; (i.e. In ML lab -> expert in AI -> expert in CS)
@@ -93,9 +94,20 @@
 	(nuGroupMember ?group ?advisor))
 
 ;; This isn't true if a student has multiple advisors...
+;; Infer then ask???
 ;;(<== (nuGroupMember ?group ?advisor)
 ;;	(advisorOf ?person ?advisor)
 ;;	(nuGroupMember ?group ?person))
+
+;; Interest inference
+;; ------------------------------------------------------------------------
+(<== (interests ?person ?topic)
+	(nuGroupMember ?person ?group)
+	(academicTopicOf ?group ?topic))
+
+(<== (interests ?person ?topic)
+	(courseInstructor ?course ?person)
+	(academicTopicOf ?course ?topic))
 
 ;; Schedule inference
 ;; ------------------------------------------------------------------------
