@@ -123,6 +123,7 @@ def clean_topic_name(topic_name):
 
     return cleaned_topic_name
 
+
 def generate_index_terms(name_str):
     # generate list of tokens without stop words
     cleaned_str = name_str.strip().lower().translate(str.maketrans('', '', string.punctuation))
@@ -279,4 +280,4 @@ def main():
 
 
 if __name__ == '__main__':
-  main()
+    main()

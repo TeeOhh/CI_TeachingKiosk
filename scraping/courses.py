@@ -1,4 +1,4 @@
-from faculty import scrapeFacultyData
+from faculty import scrape_faculty_data
 
 import pandas as pd
 import re
@@ -10,7 +10,10 @@ stops = set(stopwords.words('english'))
 
 
 def fetch_formatted_faculty_data():
-    faculty_data = scrapeFacultyData()
+    """
+    Fetches and formats data scraped from faculty webpage.
+    """
+    faculty_data = scrape_faculty_data()
     for faculty in faculty_data:
         curr_faculty_name = faculty['name'].strip()
         faculty_name_split = curr_faculty_name.split(' ')
@@ -32,6 +35,9 @@ def fetch_formatted_faculty_data():
 
 
 def fetch_and_parse_course_data(filepath):
+    """
+    Fetch and parse course data from CSV file.
+    """
     # load data
     data = pd.read_csv(filepath)
 
@@ -58,7 +64,10 @@ def fetch_and_parse_course_data(filepath):
     return data
 
 
-def format_name(name_str):
+def format_course_name(name_str):
+    """
+    Format course name for ontologizing.
+    """
     cleaned_str = name_str.strip().title().translate(str.maketrans('', '', string.punctuation))
     tokenized_name = word_tokenize(cleaned_str)
     stops_removed = [i for i in tokenized_name if i.lower() not in stops]
@@ -66,6 +75,9 @@ def format_name(name_str):
 
 
 def instructor_names(instructors, faculty_list):
+    """
+    Format list of instructor names for ontologizing so that we have both the pretty string and the ontology string.
+    """
     pretty_instructor_names = []
     ontology_instructor_names = []
 
@@ -80,6 +92,9 @@ def instructor_names(instructors, faculty_list):
 
 
 def create_course_list(data, faculty_list):
+    """
+    Create a course dict for each course in the scraped CSV data.
+    """
     course_list = []
 
     # loop over each course in data
@@ -88,7 +103,7 @@ def create_course_list(data, faculty_list):
 
         curr_course_dict = {
             'pretty_name': course['title'],
-            'formatted_name': format_name(course['title']),
+            'formatted_name': format_course_name(course['title']),
             'course_number': course['course'],
             'quarter_offered': course['qtr'],
             'year_offered': course['year'],
@@ -106,6 +121,9 @@ def create_course_list(data, faculty_list):
 
 
 def day_abbrev_to_str(day_abbrev):
+    """
+    Convert day abbreviation into a full day string.
+    """
     cleaned_day_abbrev = day_abbrev.strip().lower()
 
     if cleaned_day_abbrev == 'm':
@@ -123,6 +141,10 @@ def day_abbrev_to_str(day_abbrev):
 
 
 def generate_time_string(days_offered, start_time, end_time):
+    """
+    Generate a course time string in  the format 'Monday/Wednesday from 14:00 to 14:50'
+    :return:
+    """
     # convert day abbreviation to full text string
     day_strs = [day_abbrev_to_str(day) for day in days_offered]
 
@@ -131,6 +153,9 @@ def generate_time_string(days_offered, start_time, end_time):
 
 
 def convert_course_to_krf(course_dict):
+    """
+    Generate KRF for single course.
+    """
     course_krf = []
 
     # setup course name
@@ -164,10 +189,16 @@ def convert_course_to_krf(course_dict):
 
 
 def generate_krf_list(course_list):
+    """
+    Generate KRF for all courses.
+    """
     return '\n\n'.join([convert_course_to_krf(course_dict) for course_dict in course_list])
 
 
-def main():
+def run_scraper():
+    """
+    Run scraper
+    """
     input_filepath = '../data/cs-courses_2019-2020.csv'
     output_dir = '../krf'
 
@@ -201,4 +232,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    run_scraper()
