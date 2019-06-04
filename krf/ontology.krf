@@ -83,7 +83,7 @@
 (arg2Isa academicTopicOf AcademicTopic)
 
 (isa preReq Predicate)
-(comment preReq "A predicate indiciating that ARG1 is a prerequisite for ARG2.)
+(comment preReq "A predicate indiciating that ARG1 is a prerequisite for ARG2.")
 (arity preReq 2)
 (arg1Isa preReq NUCourse)
 (arg2Isa preReq NUCourse)
