@@ -2,6 +2,7 @@
 
 (isa IntroProgrammingNonMajors-Spring2020 NUCourse-CS)
 (courseName IntroProgrammingNonMajors-Spring2020 "Intro Programming for non-majors")
+(academicTopicOf IntroProgrammingNonMajors-Spring2020 ComputerScience)
 (courseTimeString IntroProgrammingNonMajors-Spring2020 "Monday/Wednesday/Friday from 11:00 to 11:50")
 (courseInstructor IntroProgrammingNonMajors-Spring2020 SarahVanWart)
 (indexedProperName (TheList) 110 IntroProgrammingNonMajors-Spring2020)
@@ -10,6 +11,7 @@
 
 (isa FundamentalsComputerProgramming1-Spring2020 NUCourse-CS)
 (courseName FundamentalsComputerProgramming1-Spring2020 "Fundamentals of Computer Programming 1")
+(academicTopicOf FundamentalsComputerProgramming1-Spring2020 ComputerScience)
 (courseTimeString FundamentalsComputerProgramming1-Spring2020 "Tuesday/Thursday from 14:00 to 15:20")
 (courseInstructor FundamentalsComputerProgramming1-Spring2020 JesseTov)
 (indexedProperName (TheList) 111 FundamentalsComputerProgramming1-Spring2020)
@@ -27,6 +29,7 @@
 
 (isa FundamentalsComputerProgramming2-Spring2020 NUCourse-CS)
 (courseName FundamentalsComputerProgramming2-Spring2020 "Fundamentals of Computer Programming 2")
+(academicTopicOf FundamentalsComputerProgramming2-Spring2020 ComputerScience)
 (courseTimeString FundamentalsComputerProgramming2-Spring2020 "Tuesday/Thursday from 12:30 to 13:50")
 (courseInstructor FundamentalsComputerProgramming2-Spring2020 SaraOwsleySood)
 (indexedProperName (TheList) 211 FundamentalsComputerProgramming2-Spring2020)
@@ -70,6 +73,7 @@
 
 (isa FundamentalsProgramming15-Spring2020 NUCourse-CS)
 (courseName FundamentalsProgramming15-Spring2020 "Fundamentals of Programming 1.5")
+(academicTopicOf FundamentalsProgramming15-Spring2020 ComputerScience)
 (courseTimeString FundamentalsProgramming15-Spring2020 "Monday/Wednesday/Friday from 11:00 to 11:50")
 (courseInstructor FundamentalsProgramming15-Spring2020 SaraOwsleySood)
 (indexedProperName (TheList) 295 FundamentalsProgramming15-Spring2020)

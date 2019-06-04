@@ -1,15 +1,15 @@
 Qtr,Course,Secondary Number,Title,Instructor,Course Topic Area,Days,Start,End,Duration,Historical enrollment
-F,101,,"Computer Science: Concepts, Philosophy, and Connections",Birnbaum,,MWF,14:00,14:50,0:50,
-F,110,,Intro Programming for non-majors,Van Wart,,MWF,10:00,10:50,0:50,45
-S,110,,Intro Programming for non-majors,Van Wart,,MWF,11:00,11:50,0:50,52
-W,110,,Intro Programming for non-majors,Van Wart,,TuTh,16:00,17:20,1:20,46
-F,111,,Fundamentals of Computer Programming 1,Horswill/Wilson,,MWF,13:00,13:50,0:50,310
-S,111,,Fundamentals of Computer Programming 1,Tov,,TuTh,14:00,15:20,1:20,56
-W,111,,Fundamentals of Computer Programming 1,Sood,,MWF,11:00,11:50,0:50,360
+F,101,,"Computer Science: Concepts, Philosophy, and Connections",Birnbaum,ComputerScience,MWF,14:00,14:50,0:50,
+F,110,,Intro Programming for non-majors,Van Wart,ComputerScience,MWF,10:00,10:50,0:50,45
+S,110,,Intro Programming for non-majors,Van Wart,ComputerScience,MWF,11:00,11:50,0:50,52
+W,110,,Intro Programming for non-majors,Van Wart,ComputerScience,TuTh,16:00,17:20,1:20,46
+F,111,,Fundamentals of Computer Programming 1,Horswill/Wilson,ComputerScience,MWF,13:00,13:50,0:50,310
+S,111,,Fundamentals of Computer Programming 1,Tov,ComputerScience,TuTh,14:00,15:20,1:20,56
+W,111,,Fundamentals of Computer Programming 1,Sood,ComputerScience,MWF,11:00,11:50,0:50,360
 S,130,,Tools and Technologies of the Web,Van Wart,SoftwareDevelopmentTechniques-Topic,MW,16:00,16:50,0:50,
-F,211,,Fundamentals of Computer Programming 2,Sood,,TuTh,12:30,13:50,1:20,91
-S,211,,Fundamentals of Computer Programming 2,Sood,,TuTh,12:30,13:50,1:20,203
-W,211,,Fundamentals of Computer Programming 2,Tov,,TuTh,14:00,15:20,1:20,155
+F,211,,Fundamentals of Computer Programming 2,Sood,ComputerScience,TuTh,12:30,13:50,1:20,91
+S,211,,Fundamentals of Computer Programming 2,Sood,ComputerScience,TuTh,12:30,13:50,1:20,203
+W,211,,Fundamentals of Computer Programming 2,Tov,ComputerScience,TuTh,14:00,15:20,1:20,155
 F,212,,Discrete math,Vijayaraghavan,DiscreteMathematics-Topic,MWF,15:00,15:50,0:50,95
 S,212,,Discrete math,Vijayaraghavan,DiscreteMathematics-Topic,MWF,15:00,15:50,0:50,111
 W,212,,Discrete math,STAFF,DiscreteMathematics-Topic,MWF,16:00,16:50,0:50,55
@@ -22,9 +22,9 @@ S,214,,Data structures,Horswill,DataStructuresDesignAnalysis-Topic,MWF,13:00,13:
 W,214,,Data structures,St-Amour,DataStructuresDesignAnalysis-Topic,TuTh,16:00,17:20,1:20,
 F,217,,Data management and information processing,STAFF,DataManagementSystems-Topic,TuTh,12:30,13:50,1:20,41
 S,217,,Data management and information processing,STAFF,DataManagementSystems-Topic,TuTh,14:00,15:20,1:20,56
-W,230,,Programming for engineers,Tov,,TuTh,12:30,13:50,1:20,36
+W,230,,Programming for engineers,Tov,ComputerScience,TuTh,12:30,13:50,1:20,36
 F,295,,Intensive Program Design,Tov/Findler,SoftwareDevelopmentTechniques-Topic,TuTh,12:00,14:50,2:50,12
-S,295,,Fundamentals of Programming 1.5,Sood,,MWF,11:00,11:50,0:50,49
+S,295,,Fundamentals of Programming 1.5,Sood,ComputerScience,MWF,11:00,11:50,0:50,49
 S,301,,Intro to Robotics Laboratory,Argall,Robotics-Topic,TuTh,14:00,18:00,4:00,
 S,313,413,Tangible Interaction Design and Learning,Horn,InteractionTechniques-Topic,TuTh,15:30,16:50,1:20,24
 S,314,,Tech & Human Interaction,Gergle,HumanComputerInteraction-Topic,TuTh,9:30,10:50,1:20,21

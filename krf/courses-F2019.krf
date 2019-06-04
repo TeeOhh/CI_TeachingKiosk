@@ -2,6 +2,7 @@
 
 (isa ComputerScienceConceptsPhilosophyConnections-Fall2019 NUCourse-CS)
 (courseName ComputerScienceConceptsPhilosophyConnections-Fall2019 "Computer Science: Concepts, Philosophy, and Connections")
+(academicTopicOf ComputerScienceConceptsPhilosophyConnections-Fall2019 ComputerScience)
 (courseTimeString ComputerScienceConceptsPhilosophyConnections-Fall2019 "Monday/Wednesday/Friday from 14:00 to 14:50")
 (courseInstructor ComputerScienceConceptsPhilosophyConnections-Fall2019 LarryBirnbaum)
 (indexedProperName (TheList) 101 ComputerScienceConceptsPhilosophyConnections-Fall2019)
@@ -10,6 +11,7 @@
 
 (isa IntroProgrammingNonMajors-Fall2019 NUCourse-CS)
 (courseName IntroProgrammingNonMajors-Fall2019 "Intro Programming for non-majors")
+(academicTopicOf IntroProgrammingNonMajors-Fall2019 ComputerScience)
 (courseTimeString IntroProgrammingNonMajors-Fall2019 "Monday/Wednesday/Friday from 10:00 to 10:50")
 (courseInstructor IntroProgrammingNonMajors-Fall2019 SarahVanWart)
 (indexedProperName (TheList) 110 IntroProgrammingNonMajors-Fall2019)
@@ -18,6 +20,7 @@
 
 (isa FundamentalsComputerProgramming1-Fall2019 NUCourse-CS)
 (courseName FundamentalsComputerProgramming1-Fall2019 "Fundamentals of Computer Programming 1")
+(academicTopicOf FundamentalsComputerProgramming1-Fall2019 ComputerScience)
 (courseTimeString FundamentalsComputerProgramming1-Fall2019 "Monday/Wednesday/Friday from 13:00 to 13:50")
 (courseInstructor FundamentalsComputerProgramming1-Fall2019 IanHorswill)
 (indexedProperName (TheList) 111 FundamentalsComputerProgramming1-Fall2019)
@@ -26,6 +29,7 @@
 
 (isa FundamentalsComputerProgramming2-Fall2019 NUCourse-CS)
 (courseName FundamentalsComputerProgramming2-Fall2019 "Fundamentals of Computer Programming 2")
+(academicTopicOf FundamentalsComputerProgramming2-Fall2019 ComputerScience)
 (courseTimeString FundamentalsComputerProgramming2-Fall2019 "Tuesday/Thursday from 12:30 to 13:50")
 (courseInstructor FundamentalsComputerProgramming2-Fall2019 SaraOwsleySood)
 (indexedProperName (TheList) 211 FundamentalsComputerProgramming2-Fall2019)
