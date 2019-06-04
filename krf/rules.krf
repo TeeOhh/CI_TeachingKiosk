@@ -26,52 +26,56 @@
      (uninferredSentence (passedClass ?person ?course))
      (uninferredSentence (enrolledInClass ?person ?course)))
 
-;; Recommend courses in subtopics of interests as well.
-(<== (recommendCourse ?person ?course)
-     (interests ?person ?interest)
-     (isa ?interest AcademicTopic)
-     (isa ?course NUCourse)
-     (subTopic ?interest ?subtopic)
-     (academicTopicOf ?course ?subtopic)
-     (uninferredSentence (passedClass ?course ?person))
-     (uninferredSentence (enrolledInClass ?course ?person)))
+;; For use during retrieval of events or courses for a given topic. For querying with topic unbound I suggest using cacheComplete so that it doesn't return all the genls of the topic.
+(<== (academicTopicOf ?course ?topic)
+	(groundExpression ?topic)
+	(subTopicOf ?topic ?subtopic 1)
+	(academicTopicOf ?course ?subtopic))
 
 ;; A naive assumption that one who teaches a course in a topic, is an expert in a topic...
 (<== (expertInAcademicTopic ?person ?topic)
+	(groundExpression ?topic)
 	(academicTopicOf ?course ?topic)
 	(courseInstructor ?course ?person))
 
-;; One who teaches a course in a subtopic of an academic area, is an expert in that academic area.
-;; (i.e. Teaching ML course -> expert in AI)
 (<== (expertInAcademicTopic ?person ?topic)
-	(subTopic ?topic ?subtopic)
-	(academicTopicOf ?course ?subtopic)
-	(isa ?course NUCourse)
-	(courseInstructor ?course ?person))
+	(groundExpression ?person)
+	(courseInstructor ?course ?person)
+	(cacheComplete (academicTopicOf ?course ?topic)))
 
 ;; One who is in a research lab that focuses on a certain topic, is an expert in that topic.
 (<== (expertInAcademicTopic ?person ?topic)
+	(groundExpression ?topic)
 	(academicTopicOf ?group ?topic)
 	(nuGroupMember ?group ?person)
-	(isa ?group NUGroup)
 	(isa ?person NUStaff))
 
-;; One who is in a research lab that focuses on a certain topic, is an expert in all general topics of that topic.
-;; (i.e. In ML lab -> expert in AI -> expert in CS)
 (<== (expertInAcademicTopic ?person ?topic)
-	(subTopic ?topic ?subtopic)
-	(academicTopicOf ?course ?subtopic)
-	(isa ?course NUCourse)
-	(courseInstructor ?course ?person))
+	(groundExpression ?person)
+	(nuGroupMember ?group ?person)
+	(isa ?person NUStaff)
+	(cacheComplete (academicTopicOf ?group ?topic)))
 
 (<== (preReqsSatisfied ?course ?person)
+	(groundExpression ?course)
 	(preReq ?prereq ?course)
 	(passedClass ?prereq ?person))
 
+(<== (preReqsSatisfied ?course ?person)
+	(groundExpression ?person)
+	(passedClass ?prereq ?person)
+	(preReq ?prereq ?course))
+
 ;; if a student has passed a course with pre-reqs, assume they've passed pre-reqs
 (<== (passedClass ?prereq ?person)
+	(groundExpression ?prereq)
 	(preReq ?prereq ?course)
 	(passedClass ?course ?person))
+
+(<== (passedClass ?prereq ?person)
+	(groundExpression ?person)
+	(passedClass ?course ?person)
+	(preReq ?prereq ?course))
 
 ;; subTopic generals inference base case
 (<== (subTopic ?topic ?topic2)
@@ -90,8 +94,14 @@
 
 ;; One is a member of a research lab/group if their advisor is
 (<== (nuGroupMember ?group ?person)
+	(groundExpression ?person)
 	(advisorOf ?person ?advisor)
 	(nuGroupMember ?group ?advisor))
+
+(<== (nuGroupMember ?group ?person)
+	(groundExpression ?group)
+	(nuGroupMember ?group ?advisor)
+	(advisorOf ?person ?advisor))
 
 ;; This isn't true if a student has multiple advisors...
 ;; Infer then ask???
@@ -102,12 +112,24 @@
 ;; Interest inference
 ;; ------------------------------------------------------------------------
 (<== (interests ?person ?topic)
+	(groundExpression ?person)
 	(nuGroupMember ?person ?group)
-	(academicTopicOf ?group ?topic))
+	(cacheComplete (academicTopicOf ?group ?topic)))
 
 (<== (interests ?person ?topic)
+	(groundExpression ?topic)
+	(academicTopicOf ?group ?topic)
+	(nuGroupMember ?person ?group))
+
+(<== (interests ?person ?topic)
+	(groundExpression ?person)
 	(courseInstructor ?course ?person)
-	(academicTopicOf ?course ?topic))
+	(cacheComplete (academicTopicOf ?course ?topic)))
+
+(<== (interests ?person ?topic)
+	(groundExpression ?topic)
+	(academicTopicOf ?course ?topic)
+	(courseInstructor ?course ?person))
 
 ;; Schedule inference
 ;; ------------------------------------------------------------------------
