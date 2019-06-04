@@ -89,7 +89,7 @@ def generate_krf_list(group_list):
     return '\n\n'.join([convert_group_to_krf(group_dict) for group_dict in group_list])
 
 
-def main():
+def scrape_groups():
     input_filepath = '../data/nu_cs_groups.csv'
     output_dir = '../krf'
 
@@ -108,4 +108,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    scrape_groups()

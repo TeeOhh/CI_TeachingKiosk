@@ -195,7 +195,7 @@ def generate_krf_list(course_list):
     return '\n\n'.join([convert_course_to_krf(course_dict) for course_dict in course_list])
 
 
-def run_scraper():
+def scrape_courses():
     """
     Run scraper
     """
@@ -232,4 +232,4 @@ def run_scraper():
 
 
 if __name__ == '__main__':
-    run_scraper()
+    scrape_courses()

@@ -229,12 +229,10 @@ def generate_event_krf():
     return meld.strip()
 
 
-def main():
-    print('scraping NU events from planitpurple...', end="", flush=True)
+def scrape_events():
     events_meld = generate_event_krf()
     to_file(events_meld, '../krf', 'events')
-    print('finished.')
 
 
 if __name__ == '__main__':
-    main()
+    scrape_events()

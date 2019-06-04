@@ -273,10 +273,10 @@ def generate_krf_for_faculty(colleges):
     return meld.strip()
 
 
-def main():
+def scrape_faculty():
     faculty_meld = generate_krf_for_faculty(fetch_colleges())
     to_file(faculty_meld, '../krf', 'faculty')
 
 
 if __name__ == '__main__':
-    main()
+    scrape_faculty()

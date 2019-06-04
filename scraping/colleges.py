@@ -30,11 +30,9 @@ def generate_college_krf(colleges):
 
 
 def scrape_colleges():
-    print('scraping colleges...', end="", flush=True)
     colleges = fetch_colleges()
     college_krf = generate_college_krf(colleges)
     to_file(college_krf, '../krf', 'colleges')
-    print('finished.')
 
 
 if __name__ == '__main__':

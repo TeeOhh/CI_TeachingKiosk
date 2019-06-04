@@ -249,7 +249,7 @@ def scrape_and_parse_page():
     return parsed_content
 
 
-def main():
+def scrape_cs_fields():
     # scrape ACM CCS
     scraped_data = scrape_and_parse_page()
 
@@ -280,4 +280,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    scrape_cs_fields()
