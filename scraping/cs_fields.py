@@ -9,8 +9,10 @@ import bs4 as bs
 
 import string
 import re
+
+from nltk import word_tokenize
 from nltk.corpus import stopwords
-stops = set(stopwords.words("english"))
+stops = set(stopwords.words('english'))
 
 # set ssl context
 context = ssl._create_unverified_context()
@@ -121,6 +123,24 @@ def clean_topic_name(topic_name):
 
     return cleaned_topic_name
 
+def generate_index_terms(name_str):
+    # generate list of tokens without stop words
+    cleaned_str = name_str.strip().lower().translate(str.maketrans('', '', string.punctuation))
+    tokenized_name = word_tokenize(cleaned_str)
+    stops_removed = [i for i in tokenized_name if i.lower() not in stops]
+
+    # SPECIAL CASE FOR GRAPHICS
+    for index, word in enumerate(stops_removed):
+        if word == 'graphics':
+            stops_removed[index] = 'graphicss'
+
+    # 3 formats for indexedProperName
+    return [
+        (' '.join(stops_removed[0:-1]).strip(), stops_removed[-1]),
+        (' '.join(['the'] + stops_removed), 'topic'),
+        (' '.join(['the'] + stops_removed), 'subtopic')
+    ]
+
 
 def generate_krf_as_list(tree, krf_list):
     # base case: no more children
@@ -143,9 +163,22 @@ def generate_krf_as_list(tree, krf_list):
                     curr_parent_name = clean_topic_name(child['parent'])
 
                 krf_list.append('(subTopicOf {} {} 1)'.format(curr_parent_name, curr_child_name))
+
+            # add indexedProperName
+            for index_text in generate_index_terms(child['name']):
+                krf_list.append('(indexedProperName (TheList {}) {} {})'.format(index_text[0],
+                                                                                index_text[1],
+                                                                                curr_child_name))
+
         else:
             krf_list.append('(isa {} AcademicTopic)'.format(child['name']))
+            krf_list.append('(indexedProperName (TheList computer) science ComputerScience)')
+            krf_list.append('(indexedProperName (TheList the computer science) field ComputerScience)')
+            krf_list.append('(indexedProperName (TheList the computer science) topic ComputerScience)')
+            krf_list.append('(indexedProperName (TheList ) cs ComputerScience)')
+            krf_list.append('(indexedProperName (TheList ) eecs ComputerScience)')
 
+        # get krf for children
         krf_list = generate_krf_as_list(child['children'], krf_list)
 
     return krf_list
