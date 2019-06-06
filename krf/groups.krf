@@ -62,6 +62,7 @@
 (indexedProperName (TheList prescience) lab PrescienceLab)
 (indexedProperName (TheList the prescience lab) group PrescienceLab)
 
+(isa KenForbus AcademicProfessional) ;for some reason not in Mt
 (isa NorthwesternArtificialIntelligenceGroup NUGroup)
 (academicTopicOf NorthwesternArtificialIntelligenceGroup ArtificialIntelligence-Topic)
 (nuGroupMember NorthwesternArtificialIntelligenceGroup KenForbus)
