@@ -1,4 +1,6 @@
 (in-microtheory CollegeNamesMt)
+(in-microtheory TeachingKioskMt)
+
 (isa ATStillUniversity College)
 (prettyString ATStillUniversity "A.T. Still University")
 

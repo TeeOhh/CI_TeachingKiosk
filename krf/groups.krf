@@ -32,8 +32,8 @@
 (indexedProperName (TheList the delta lab) group DeltaLab)
 
 (isa InteractiveAudioLab NUGroup)
-(academicTopicOf InteractiveAudioLab MachineLearning-Topic)
 (academicTopicOf InteractiveAudioLab SoundMusicComputing-Topic)
+(academicTopicOf InteractiveAudioLab MachineLearning-Topic)
 (nuGroupMember InteractiveAudioLab BryanPardo)
 (indexedProperName (TheList interactive audio) lab InteractiveAudioLab)
 (indexedProperName (TheList the interactive audio lab) group InteractiveAudioLab)
@@ -62,11 +62,10 @@
 (indexedProperName (TheList prescience) lab PrescienceLab)
 (indexedProperName (TheList the prescience lab) group PrescienceLab)
 
-(isa KenForbus AcademicProfessional) ;for some reason not in Mt
 (isa NorthwesternArtificialIntelligenceGroup NUGroup)
 (academicTopicOf NorthwesternArtificialIntelligenceGroup ArtificialIntelligence-Topic)
-(nuGroupMember NorthwesternArtificialIntelligenceGroup KenForbus)
 (nuGroupMember NorthwesternArtificialIntelligenceGroup ThomasHinrichs)
+(nuGroupMember NorthwesternArtificialIntelligenceGroup KenForbus)
 (indexedProperName (TheList northwestern artificial intelligence) group NorthwesternArtificialIntelligenceGroup)
 (indexedProperName (TheList the northwestern artificial intelligence group) group NorthwesternArtificialIntelligenceGroup)
 
@@ -84,10 +83,10 @@
 
 (isa NorthwesternCsTheoryGroup NUGroup)
 (academicTopicOf NorthwesternCsTheoryGroup TheoryComputation-Topic)
+(nuGroupMember NorthwesternCsTheoryGroup MingYangKao)
 (nuGroupMember NorthwesternCsTheoryGroup AravindanVijayaraghavan)
 (nuGroupMember NorthwesternCsTheoryGroup SamirKhuller)
-(nuGroupMember NorthwesternCsTheoryGroup JasonDHartline)
 (nuGroupMember NorthwesternCsTheoryGroup KonstantinMakarychev)
-(nuGroupMember NorthwesternCsTheoryGroup MingYangKao)
+(nuGroupMember NorthwesternCsTheoryGroup JasonDHartline)
 (indexedProperName (TheList northwestern cs theory) group NorthwesternCsTheoryGroup)
 (indexedProperName (TheList the northwestern cs theory group) group NorthwesternCsTheoryGroup)

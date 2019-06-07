@@ -1,3 +1,5 @@
+(in-microtheory TeachingKioskMt)
+
 (in-microtheory (SocialModelMtFn SamirKhuller))
 (isa SamirKhuller NUPerson)
 (isa SamirKhuller NUFaculty)
