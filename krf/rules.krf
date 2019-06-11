@@ -5,7 +5,8 @@
 ;;;;   Created: May 8, 2019 16:00:09
 ;;;;   Purpose: 
 ;;;; ---------------------------------------------------------------------------
-(in-microtheory TeachingKioskMt)
+(in-microtheory TeachingKioskRulesMt)
+(genlMt TeachingKioskRulesMt TeachingKioskMt)
 
 ;; extract interests and preferences based on courses taken
 (<== (recommendNUEvent ?person ?event)
@@ -109,6 +110,7 @@
 
 ;; Interest inference
 ;; ------------------------------------------------------------------------
+;; One is interested in a topic if they are a member of a group that focuses on that topic
 (<== (interests ?person ?topic)
 	(groundExpression ?person)
 	(nuGroupMember ?group ?person)
@@ -120,6 +122,7 @@
 	(isa ?group NUGroup)
 	(nuGroupMember ?group ?person))
 
+;; One is interested in a topic of they teach a course in the topic. A bit naive...
 (<== (interests ?person ?topic)
 	(groundExpression ?person)
 	(courseInstructor ?course ?person)

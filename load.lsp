@@ -15,7 +15,7 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defvar *kiosk-path* "C:\\Users\\taylor\\Desktop\\CI_TeachingKiosk\\krf\\")
-(defvar *kr-files* '("ontology" "academic-fields-small-level4" "courses-2019-2020" "rules" "groups"))
+(defvar *kr-files* '("ontology" "academic-topics-small-level4" "courses-2019-2020" "rules" "groups"))
 
 (defun reload-kiosk-mts ()
   (wipe-kiosk-mts)

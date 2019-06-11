@@ -1,4 +1,4 @@
-(in-microtheory TeachingKioskMt)
+(in-microtheory TeachingKioskCoursesWinter2019Mt)
 
 (isa IntroProgrammingNonMajors-Winter2020 NUCourse-CS)
 (courseName IntroProgrammingNonMajors-Winter2020 "Intro Programming for non-majors")

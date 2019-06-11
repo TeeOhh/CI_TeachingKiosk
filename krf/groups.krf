@@ -1,4 +1,5 @@
-(in-microtheory TeachingKioskMt)
+(in-microtheory TeachingKioskGroupsMt)
+(genlMt TeachingKioskGroupsMt TeachingKioskMt)
 
 (isa Aqualab NUGroup)
 (academicTopicOf Aqualab DistributedArchitectures-Topic)

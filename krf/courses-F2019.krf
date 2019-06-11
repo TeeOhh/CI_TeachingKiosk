@@ -1,4 +1,4 @@
-(in-microtheory TeachingKioskMt)
+(in-microtheory TeachingKioskCoursesFall2019Mt)
 
 (isa ComputerScienceConceptsPhilosophyConnections-Fall2019 NUCourse-CS)
 (courseName ComputerScienceConceptsPhilosophyConnections-Fall2019 "Computer Science: Concepts, Philosophy, and Connections")

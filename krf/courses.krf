@@ -1,4 +1,5 @@
-(in-microtheory TeachingKioskMt)
+(in-microtheory TeachingKioskCoursesMt)
+(genlMt TeachingKioskCoursesMt TeachingKioskMt)
 
 (isa CompanionCognitiveSystemStudio-Spring2018 NUCourse)
 (academicAreaOf CompanionCognitiveSystemStudio-Spring2018 ArtificialIntelligence-Topic)

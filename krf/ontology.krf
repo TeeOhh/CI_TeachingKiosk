@@ -10,7 +10,6 @@
 ;;;; ---------------------------------------------------------------------------
 
 (in-microtheory TeachingKioskMt)
-(isa TeachingKioskMt Microtheory)
 (genlMt TeachingKioskMt SocialModelingEnglishMt)
 (comment TeachingKioskMt "TeachingKioskMt contains the user model, user/course Predicates, and the ontology of academic topics and courses.")
 

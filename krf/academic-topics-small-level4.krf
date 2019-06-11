@@ -1,4 +1,5 @@
-(in-microtheory TeachingKioskMt)
+(in-microtheory TeachingKioskAcademicTopicsDepth4Mt)
+(genlMt TeachingKioskAcademicTopicsDepth4Mt TeachingKioskMt)
 
 (isa ComputerScience AcademicTopic)
 (indexedProperName (TheList computer) science ComputerScience)
