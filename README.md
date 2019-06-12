@@ -107,7 +107,7 @@ Tell the system you're interested in Machine Learning:
 (fire:tell-it '(interests agent123 MachineLearning-Topic) :context 'TeachingKioskMt)
 ```
 
-What courses would I like?:
+What courses would you like?:
 ```
 (fire:query '(recommendCourse agent123 ?course) :response '?course :context 'TeachingKioskMt)
 ```
