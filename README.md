@@ -2,7 +2,7 @@
 Repository for Conversational Interfaces group "Teaching the Kiosk". All project work was conducted in Spring 2019.
 
 This repository contains :
-1. Code to scrape and ontologize the following:
+1. Code to scrape and ontologize:
     1. NU Computer Science courses, faculty, and research groups
     2. Events occurring around campus
     3. A graph of topics and sub-topics in Computer Science
@@ -49,82 +49,90 @@ How to get a development env running and some more examples to test that you hav
     ```
     If loading was successful, the query should return the list of all direct child topics of AI:
     ```
-    (NaturalLanguageProcessing-Topic KnowledgeRepresentationReasoning-Topic PlanningScheduling-Topic SearchMethodologies-Topic ControlMethods-Topic PhilosophicalTheoreticalFoundationsArtificialIntelligence-Topic DistributedArtificialIntelligence-Topic ComputerVision-Topic SymbolicAlgebraicManipulation-Topic MachineLearning-Topic ModelingSimulation-Topic)
+    (NaturalLanguageProcessing-Topic KnowledgeRepresentationReasoning-Topic PlanningScheduling-Topic
+        SearchMethodologies-Topic ControlMethods-Topic PhilosophicalTheoreticalFoundationsArtificialIntelligence-Topic
+        DistributedArtificialIntelligence-Topic ComputerVision-Topic SymbolicAlgebraicManipulation-Topic
+        MachineLearning-Topic ModelingSimulation-Topic)
     ```
 
 ## Example Queries and Outputs
 
-Get the list of courses offered in Computer Graphics:
+### Get the list of courses offered in Computer Graphics
+**Query**
 ```
 (fire:query '(and (academicTopicOf ?course ComputerGraphics-Topic)
                               (isa ?course NUCourse-CS))
               :response '?course :context 'TeachingKioskMt)
 ```
 
-Output:
+**Output**
 ```
 (IntermediateComputerGraphics-Winter2020 IntroComputerGraphics-Fall2019
- CompPhotographySeminar-Spring2020 IntroComputationPhototography-Fall2019)
+    CompPhotographySeminar-Spring2020 IntroComputationPhototography-Fall2019)
 ```
 
-See what topics are like Computer Graphics:
+### See what topics are like Computer Graphics
+**Query**
 ```
 (fire:query '(and (subTopicOf ?parentTopic ComputerGraphics-Topic 1)
                                (subTopicOf ?parentTopic ?subTopic 1))
               :response '?subTopic :context 'TeachingKioskMt)
 ```
 
-Output:
+**Output**
 ```
 (Hardware-Topic ComputerSystemsOrganization-Topic Networks-Topic SoftwareEngineering-Topic
- TheoryComputation-Topic MathematicsComputing-Topic InformationSystems-Topic
- SecurityPrivacy-Topic HumanComputerInteraction-Topic AppliedComputing-Topic
- SocialProfessionalTopics-Topic ArtificialIntelligence-Topic
- ParallelComputingMethodologies-Topic DistributedComputingMethodologies-Topic
- ConcurrentComputingMethodologies-Topic ComputerGraphics-Topic)
+    TheoryComputation-Topic MathematicsComputing-Topic InformationSystems-Topic
+    SecurityPrivacy-Topic HumanComputerInteraction-Topic AppliedComputing-Topic
+    SocialProfessionalTopics-Topic ArtificialIntelligence-Topic
+    ParallelComputingMethodologies-Topic DistributedComputingMethodologies-Topic
+    ConcurrentComputingMethodologies-Topic ComputerGraphics-Topic)
 ```
 
-Get the list of experts in Computer Graphics:
+### Get the list of experts in Computer Graphics
+**Query**
 ```
 (fire:query '(expertInAcademicTopic ?expert ComputerGraphics-Topic)
               :response '?expert :context 'TeachingKioskMt)
 ```
 
-Output:
+**Output**
 ```
 (OliverSCossairt JackETumblin)
 ```
 
-**Examples of user model based inference and recommendation.**
+## Examples of user model based inference and recommendation
 
-Tell the system who you are:
+### Tell the system who you are:
 ```
 (fire:tell-it '(isa agent123 NUPerson) :context 'TeachingKioskMt)
 ```
 
-Tell the system you're interested in Machine Learning:
+### Tell the system you're interested in Machine Learning:
 ```
 (fire:tell-it '(interests agent123 MachineLearning-Topic) :context 'TeachingKioskMt)
 ```
 
-What courses would you like?:
+### Ask the system: What courses would you like?
+**Query**
 ```
 (fire:query '(recommendCourse agent123 ?course) :response '?course :context 'TeachingKioskMt)
 ```
 
-Output:
+**Output**
 ```
 (MachineLearning-Fall2019 MachineLearning-Spring2020)
 ```
 
-Who's an expert in the topics you're interested in?:
+### Ask the system: Who's an expert in the topics you're interested in?
+**Query**
 ```
 (fire:query '(and (interests agent123 ?interest)
                                (expertInAcademicTopic ?expert ?interest))
                                :response '?expert :context 'TeachingKioskMt)
 ```
 
-Output:
+**Output**
 ```
 (BryanPardo)
 ```
