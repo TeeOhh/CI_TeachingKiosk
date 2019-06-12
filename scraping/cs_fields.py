@@ -276,7 +276,7 @@ def scrape_cs_fields():
     level = 4
     with open('../krf/academic-topics-small-level{}.krf'.format(level), 'w') as outfile:
         outfile.write('(in-microtheory TeachingKioskAcademicTopicsDepth4Mt)\n')
-        outfile.write('(genlMt TeachingKioskAcademicTopicsDepth4Mt TeachingKioskMt)\n\n')
+        outfile.write('(genlMt TeachingKioskMt TeachingKioskAcademicTopicsDepth4Mt)\n\n')
         outfile.write('\n'.join(generate_krf_as_list(get_nodes_at_depth(copy.deepcopy(scraped_data), 1, level), [])))
 
 

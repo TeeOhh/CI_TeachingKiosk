@@ -234,7 +234,7 @@ def scrape_courses():
     full_course_list = create_course_list(course_df, faculty_list)
     with open('{}/courses-2019-2020.krf'.format(output_dir), 'w') as f:
         f.write('(in-microtheory TeachingKioskCourses2019Mt)\n')
-        f.write('(genlMt TeachingKioskCourses2019Mt TeachingKioskMt)\n\n')
+        f.write('(genlMt TeachingKioskMt TeachingKioskCourses2019Mt)\n\n')
         f.write(generate_krf_list(full_course_list))
 
     return create_course_list(course_df, faculty_list)

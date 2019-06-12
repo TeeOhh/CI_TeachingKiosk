@@ -6,7 +6,7 @@
 ;;;;   Purpose: 
 ;;;; ---------------------------------------------------------------------------
 (in-microtheory TeachingKioskRulesMt)
-(genlMt TeachingKioskRulesMt TeachingKioskMt)
+(genlMt TeachingKioskMt TeachingKioskRulesMt)
 
 ;; extract interests and preferences based on courses taken
 (<== (recommendNUEvent ?person ?event)

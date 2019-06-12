@@ -1,5 +1,5 @@
 (in-microtheory TeachingKioskGroupsMt)
-(genlMt TeachingKioskGroupsMt TeachingKioskMt)
+(genlMt TeachingKioskMt TeachingKioskGroupsMt)
 
 (isa Aqualab NUGroup)
 (academicTopicOf Aqualab DistributedArchitectures-Topic)
@@ -33,8 +33,8 @@
 (indexedProperName (TheList the delta lab) group DeltaLab)
 
 (isa InteractiveAudioLab NUGroup)
-(academicTopicOf InteractiveAudioLab SoundMusicComputing-Topic)
 (academicTopicOf InteractiveAudioLab MachineLearning-Topic)
+(academicTopicOf InteractiveAudioLab SoundMusicComputing-Topic)
 (nuGroupMember InteractiveAudioLab BryanPardo)
 (indexedProperName (TheList interactive audio) lab InteractiveAudioLab)
 (indexedProperName (TheList the interactive audio lab) group InteractiveAudioLab)
@@ -84,10 +84,10 @@
 
 (isa NorthwesternCsTheoryGroup NUGroup)
 (academicTopicOf NorthwesternCsTheoryGroup TheoryComputation-Topic)
-(nuGroupMember NorthwesternCsTheoryGroup MingYangKao)
 (nuGroupMember NorthwesternCsTheoryGroup AravindanVijayaraghavan)
-(nuGroupMember NorthwesternCsTheoryGroup KonstantinMakarychev)
 (nuGroupMember NorthwesternCsTheoryGroup SamirKhuller)
+(nuGroupMember NorthwesternCsTheoryGroup MingYangKao)
+(nuGroupMember NorthwesternCsTheoryGroup KonstantinMakarychev)
 (nuGroupMember NorthwesternCsTheoryGroup JasonDHartline)
 (indexedProperName (TheList northwestern cs theory) group NorthwesternCsTheoryGroup)
 (indexedProperName (TheList the northwestern cs theory group) group NorthwesternCsTheoryGroup)

@@ -102,7 +102,7 @@ def scrape_groups():
     # write krf
     with open('{}/groups.krf'.format(output_dir), 'w') as f:
         f.write('(in-microtheory TeachingKioskGroupsMt)\n')
-        f.write('(genlMt TeachingKioskGroupsMt TeachingKioskMt)\n\n')
+        f.write('(genlMt TeachingKioskMt TeachingKioskGroupsMt)\n\n')
         f.write(generate_krf_list(group_list))
 
     return group_list

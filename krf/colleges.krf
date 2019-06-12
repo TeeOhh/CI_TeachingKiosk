@@ -1,5 +1,5 @@
 (in-microtheory TeachingKioskCollegesMt)
-(genlMt TeachingKioskCollegesMt TeachingKioskMt)
+(genlMt TeachingKioskMt TeachingKioskCollegesMt)
 
 (isa ATStillUniversity College)
 (prettyString ATStillUniversity "A.T. Still University")

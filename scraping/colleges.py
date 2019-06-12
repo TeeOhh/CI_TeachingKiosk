@@ -18,7 +18,7 @@ def fetch_colleges():
 
 def generate_college_krf(colleges):
     meld = '(in-microtheory TeachingKioskCollegesMt)\n'
-    meld += '(genlMt TeachingKioskCollegesMt TeachingKioskMt)\n\n'
+    meld += '(genlMt TeachingKioskMt TeachingKioskCollegesMt)\n\n'
     for college in colleges:
         if college:
             college = str(college).strip()
