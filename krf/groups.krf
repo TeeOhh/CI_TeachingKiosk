@@ -27,8 +27,8 @@
 
 (isa DeltaLab NUGroup)
 (academicTopicOf DeltaLab HumanComputerInteraction-Topic)
-(nuGroupMember DeltaLab HaoqiZhang)
 (nuGroupMember DeltaLab EleanorORourke)
+(nuGroupMember DeltaLab HaoqiZhang)
 (indexedProperName (TheList delta) lab DeltaLab)
 (indexedProperName (TheList the delta lab) group DeltaLab)
 
@@ -65,8 +65,8 @@
 
 (isa NorthwesternArtificialIntelligenceGroup NUGroup)
 (academicTopicOf NorthwesternArtificialIntelligenceGroup ArtificialIntelligence-Topic)
-(nuGroupMember NorthwesternArtificialIntelligenceGroup ThomasHinrichs)
 (nuGroupMember NorthwesternArtificialIntelligenceGroup KenForbus)
+(nuGroupMember NorthwesternArtificialIntelligenceGroup ThomasHinrichs)
 (indexedProperName (TheList northwestern artificial intelligence) group NorthwesternArtificialIntelligenceGroup)
 (indexedProperName (TheList the northwestern artificial intelligence group) group NorthwesternArtificialIntelligenceGroup)
 
@@ -86,8 +86,8 @@
 (academicTopicOf NorthwesternCsTheoryGroup TheoryComputation-Topic)
 (nuGroupMember NorthwesternCsTheoryGroup MingYangKao)
 (nuGroupMember NorthwesternCsTheoryGroup AravindanVijayaraghavan)
-(nuGroupMember NorthwesternCsTheoryGroup SamirKhuller)
 (nuGroupMember NorthwesternCsTheoryGroup KonstantinMakarychev)
+(nuGroupMember NorthwesternCsTheoryGroup SamirKhuller)
 (nuGroupMember NorthwesternCsTheoryGroup JasonDHartline)
 (indexedProperName (TheList northwestern cs theory) group NorthwesternCsTheoryGroup)
 (indexedProperName (TheList the northwestern cs theory group) group NorthwesternCsTheoryGroup)

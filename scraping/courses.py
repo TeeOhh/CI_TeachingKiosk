@@ -218,14 +218,23 @@ def scrape_courses():
         curr_outfile = qtr['outfile']
         curr_course_list = create_course_list(course_df[course_df['qtr'] == curr_qtr_str], faculty_list)
 
+        mt_str = ''
+        if qtr['quarter'] == 'Fall':
+            mt_str = '(in-microtheory TeachingKioskCoursesFall2019Mt)'
+        elif qtr['quarter'] == 'Winter':
+            mt_str = '(in-microtheory TeachingKioskCoursesWinter2019Mt)'
+        elif qtr['quarter'] == 'Spring':
+            mt_str = '(in-microtheory TeachingKioskCoursesSpring2019Mt)'
+
         with open('{}/courses-{}.krf'.format(output_dir, curr_outfile), 'w') as f:
-            f.write('(in-microtheory TeachingKioskMt)\n\n')
+            f.write('{}\n\n'.format(mt_str))
             f.write(generate_krf_list(curr_course_list))
 
     # also export full course list
     full_course_list = create_course_list(course_df, faculty_list)
     with open('{}/courses-2019-2020.krf'.format(output_dir), 'w') as f:
-        f.write('(in-microtheory TeachingKioskMt)\n\n')
+        f.write('(in-microtheory TeachingKioskCourses2019Mt)\n')
+        f.write('(genlMt TeachingKioskCourses2019Mt TeachingKioskMt)\n\n')
         f.write(generate_krf_list(full_course_list))
 
     return create_course_list(course_df, faculty_list)

@@ -223,7 +223,9 @@ def process_event_contact(contact):
 
 
 def generate_event_krf():
-    meld = '(in-microtheory TeachingKioskMt)\n\n'
+    meld = '(in-microtheory TeachingKioskEventsMt)\n'
+    meld += '(genltMt TeachingKioskEventsMt TeachingKioskMt)\n\n'
+
     for event in scrape_event_data():
         meld += get_event_onotologized(event)
     return meld.strip()

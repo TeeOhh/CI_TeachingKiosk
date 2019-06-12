@@ -267,7 +267,9 @@ def schooling(edu, degree, colleges, faculty_id):
 
 
 def generate_krf_for_faculty(colleges):
-    meld = '(in-microtheory TeachingKioskMt)\n\n'
+    meld = '(in-microtheory TeachingKioskFacultyMt)\n'
+    meld += '(genlMt TeachingKioskFacultyMt TeachingKioskMt)\n\n'
+
     for faculty in scrape_faculty_data():
         meld += ontologize_faculty_data(faculty, colleges)
     return meld.strip()

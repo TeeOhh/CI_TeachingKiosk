@@ -262,20 +262,21 @@ def scrape_cs_fields():
         json.dump(get_nodes_at_depth(copy.deepcopy(scraped_data), 1, 4), outfile, indent=4)
 
     # generate full krf from scraped_data
-    with open('../krf/academic-fields.krf', 'w') as outfile:
-        outfile.write('(in-microtheory TeachingKioskMt)\n\n')
+    with open('../krf/academic-topics.krf', 'w') as outfile:
+        outfile.write('(in-microtheory TeachingKioskAcademicTopicsMt)\n\n')
         outfile.write('\n'.join(generate_krf_as_list(scraped_data, [])))
 
     # generate small krf with depth limit = 3
     level = 3
-    with open('../krf/academic-fields-small-level{}.krf'.format(level), 'w') as outfile:
-        outfile.write('(in-microtheory TeachingKioskMt)\n\n')
+    with open('../krf/academic-topics-small-level{}.krf'.format(level), 'w') as outfile:
+        outfile.write('(in-microtheory TeachingKioskAcademicTopicsDepth3Mt)\n\n')
         outfile.write('\n'.join(generate_krf_as_list(get_nodes_at_depth(copy.deepcopy(scraped_data), 1, level), [])))
 
     # generate small krf with depth limit  = 4
     level = 4
-    with open('../krf/academic-fields-small-level{}.krf'.format(level), 'w') as outfile:
-        outfile.write('(in-microtheory TeachingKioskMt)\n\n')
+    with open('../krf/academic-topics-small-level{}.krf'.format(level), 'w') as outfile:
+        outfile.write('(in-microtheory TeachingKioskAcademicTopicsDepth4Mt)\n')
+        outfile.write('(genlMt TeachingKioskAcademicTopicsDepth4Mt TeachingKioskMt)\n\n')
         outfile.write('\n'.join(generate_krf_as_list(get_nodes_at_depth(copy.deepcopy(scraped_data), 1, level), [])))
 
 
