@@ -45,53 +45,88 @@ How to get a development env running and some more examples to test that you hav
     ```
 4. Test if the knowledge was loaded correctly with a simple query:
     ```
-    (load-kiosk-mts)
+    (fire:query '(subTopicOf ArtificialIntelligence-Topic ?topic 1) :response '?topic :context 'TeachingKioskMt)
     ```
-    If loading was successful, the query should return:
+    If loading was successful, the query should return the list of all direct child topics of AI:
     ```
-    OUTPUT
+    (NaturalLanguageProcessing-Topic KnowledgeRepresentationReasoning-Topic PlanningScheduling-Topic SearchMethodologies-Topic ControlMethods-Topic PhilosophicalTheoreticalFoundationsArtificialIntelligence-Topic DistributedArtificialIntelligence-Topic ComputerVision-Topic SymbolicAlgebraicManipulation-Topic MachineLearning-Topic ModelingSimulation-Topic)
     ```
 
 ## Example Queries and Outputs
 
+Get the list of courses offered in Computer Graphics:
 ```
-Query 1
-```
-
-```
-Output 1
-```
-
-```
-Query 2
+(fire:query '(and (academicTopicOf ?course ComputerGraphics-Topic)
+                              (isa ?course NUCourse-CS))
+              :response '?course :context 'TeachingKioskMt)
 ```
 
+Output:
 ```
-Output 2
-```
-
-```
-Query 3
+(IntermediateComputerGraphics-Winter2020 IntroComputerGraphics-Fall2019
+ CompPhotographySeminar-Spring2020 IntroComputationPhototography-Fall2019)
 ```
 
+See what topics are like Computer Graphics:
 ```
-Output 3
-```
-
-```
-Query 4
-```
-
-```
-Output 4
+(fire:query '(and (subTopicOf ?parentTopic ComputerGraphics-Topic 1)
+                               (subTopicOf ?parentTopic ?subTopic 1))
+              :response '?subTopic :context 'TeachingKioskMt)
 ```
 
+Output:
 ```
-Query 5
+(Hardware-Topic ComputerSystemsOrganization-Topic Networks-Topic SoftwareEngineering-Topic
+ TheoryComputation-Topic MathematicsComputing-Topic InformationSystems-Topic
+ SecurityPrivacy-Topic HumanComputerInteraction-Topic AppliedComputing-Topic
+ SocialProfessionalTopics-Topic ArtificialIntelligence-Topic
+ ParallelComputingMethodologies-Topic DistributedComputingMethodologies-Topic
+ ConcurrentComputingMethodologies-Topic ComputerGraphics-Topic)
 ```
 
+Get the list of experts in Computer Graphics:
 ```
-Output 5
+(fire:query '(expertInAcademicTopic ?expert ComputerGraphics-Topic)
+              :response '?expert :context 'TeachingKioskMt)
+```
+
+Output:
+```
+(OliverSCossairt JackETumblin)
+```
+
+**Examples of user model based inference and recommendation.**
+
+Tell the system who you are:
+```
+(fire:tell-it '(isa agent123 NUPerson) :context 'TeachingKioskMt)
+```
+
+Tell the system you're interested in Machine Learning:
+```
+(fire:tell-it '(interests agent123 MachineLearning-Topic) :context 'TeachingKioskMt)
+```
+
+What courses would I like?:
+```
+(fire:query '(recommendCourse agent123 ?course) :response '?course :context 'TeachingKioskMt)
+```
+
+Output:
+```
+(MachineLearning-Fall2019 MachineLearning-Spring2020)
+```
+
+Who's an expert in the topics you're interested in?:
+```
+(fire:query '(and (interests agent123 ?interest)
+                               (expertInAcademicTopic ?expert ?interest))
+                               :response '?expert :context 'TeachingKioskMt)
+```
+
+Output:
+```
+(BryanPardo)
 ```
 
 ## Deployment for Kiosk
